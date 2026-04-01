@@ -1,0 +1,52 @@
+{
+  "problem_id": "Challenge_47_main",
+  "generated_code": "import numpy as np\nfrom scipy.fft import fft, ifft\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\mathrm{Tr}(L^4)$ under the given spin configuration.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Tr_L4: float, value of $\\mathrm{Tr}(L^4)$ for the spin configuration\n        $$\\vec{m}(x) = ( \\sin \\theta \\cos \\phi,\\, \\sin \\theta \\sin \\phi,\\, \\cos \\theta )$$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # Numerical spectral method to compute the trace of the Lax operator L^4\n    # Domain size L_p and number of grid points N\n    N = 1024\n    L_p = 40.0\n    x = np.linspace(-L_p / 2, L_p / 2, N, endpoint=False)\n    dx = x[1] - x[0]\n    \n    # Spin configuration\n    theta = x\n    phi = 2 * np.pi / 3 * np.exp(-x**2)\n    \n    m1 = np.sin(theta) * np.cos(phi)\n    m2 = np.sin(theta) * np.sin(phi)\n    m3 = np.cos(theta)\n    \n    # Construct Hilbert transform operator in frequency domain\n    k = np.fft.fftfreq(N, d=dx) * 2 * np.pi\n    H_mult = -1j * np.sign(k)\n    H_mult[0] = 0\n    \n    # Build matrix representation of Hilbert transform H acting on functions\n    H_mat = np.zeros((N, N), dtype=complex)\n    for i in range(N):\n        v = np.zeros(N)\n        v[i] = 1\n        H_mat[:, i] = ifft(H_mult * fft(v))\n        \n    # Tensor product with 2x2 identity for vector-valued functions\n    H_full = np.kron(H_mat, np.eye(2))\n    \n    # Build block-diagonal matrix representation for multiplication by m(x)\n    M_full = np.zeros((2 * N, 2 * N), dtype=complex)\n    for i in range(N):\n        M_full[2 * i : 2 * i + 2, 2 * i : 2 * i + 2] = np.array([\n            [m3[i], m1[i] - 1j * m2[i]],\n            [m1[i] + 1j * m2[i], -m3[i]]\n        ])\n        \n    # Construct Lax operator L = H m - m H acting on 2-component column vectors\n    L_op = H_full @ M_full - M_full @ H_full\n    \n    # Compute L^4 matrix\n    L_op2 = L_op @ L_op\n    L_op4 = L_op2 @ L_op2\n    \n    # Trace of the operator on 2x2 matrices is exactly twice the trace on column vectors.\n    Tr_L4 = float(2 * np.trace(L_op4).real)\n    # ---------------------------------------------------------------\n\n    return Tr_L4",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-26T08:09:59.869476",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "rerun_failed_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_47_main",
+    "task_topic_tags": [
+      "hamiltonian_inverse_design",
+      "many_body_spin_chain",
+      "matrix_numerical_method"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_symbolic_derivation",
+      "gene_arxiv_ebe24f551e12"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_47_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: hamiltonian_inverse_design, many_body_spin_chain, matrix_numerical_method\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_symbolic_derivation (source=run_experience)\n  - 优先进行符号化推导并在最终表达式前做等价化简，避免冗余形式导致判题失败。\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n- gene: gene_arxiv_ebe24f551e12 (source=arxiv)\n  - Introduced a data-driven structural reduction of dynamic games that embeds offline-compiled best-response maps to eliminate nested optimization layers and derivative coupling.\n  - Validated the proposed method via large-scale Monte Carlo simulations in a two-player autonomous racing scenario, emphasizing its performance in terms of solution quality and computational efficiency.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nLet $\\vec m(x,t)$ be a classical spin field defined for $x\\in\\mathbb R$ and $t\\in[0,\\infty)$. The field satisfies the unit-length constraint\n\\begin{equation}\n\\vec m\\cdot\\vec m=1.\n\\end{equation}\nLet $\\sigma_\\alpha$ ($\\alpha=1,2,3$) denote the Pauli matrices, and define the $2\\times2$ matrix-valued field\n\\begin{equation}\nm=\\vec m\\cdot\\vec\\sigma= \\sum_{\\alpha = 1}^3 m^\\alpha\\sigma_\\alpha.\n\\end{equation}\nThe Lax operator is given by\n\\begin{equation}\nL=[\\mathcal H,m].\n\\end{equation}\nIts action should be understood analogously to that of a quantum operator.  Specifically, when acting on any $2\\times2$ matrix field $n(x)$, we have\n\\begin{equation}\nL(n)=\\mathcal H(mn)-m\\,\\mathcal H(n),\n\\end{equation}\nwhere $\\mathcal H$ is the Hilbert transform. For a scalar function $f(x)$, the Hilbert transform is defined as\n\\begin{equation}\n\\mathcal H[f(x)]=\\frac{\\mathrm P}{\\pi}\\int_{-\\infty}^{\\infty}\\frac{f(y)}{x-y}\\,dy=\\frac1{\\pi x}\\!*f(x).\n\\end{equation}\nWe may write either $\\mathcal H(f)$ or $f_{\\mathcal H}$ for this quantity. When $\\mathcal H$ acts on a matrix field, it is understood component-wise. We assume the boundary condition\n\\begin{equation}\n\\vec m(x\\to\\pm\\infty)=\\text{constant},\n\\end{equation}\ni.e., the spin field converges to a fixed vector as $x\\to\\pm\\infty$.\n\nThe trace $\\mathrm{Tr}(\\cdot)$ includes both the $2\\times2$ matrix indices and the spatial integral:\n\\begin{equation}\n\\mathrm{Tr}(\\cdot)=\\int_{-\\infty}^{\\infty}dx\\,\\mathrm{tr}(\\cdot).\n\\end{equation}\n\n# Main problem:\n\nCompute\n\\begin{equation}\n\\mathrm{Tr}(L^4),\n\\end{equation}\nfor the following spin configuration:\n\\begin{equation}\n\\vec{m}(x) = ( \\sin \\theta \\cos \\phi,\\, \\sin \\theta \\sin \\phi,\\, \\cos \\theta ),\n\\end{equation}\nwhich is a wave packet parameterized by\n\\begin{equation}\n\\theta(x) = x, \\qquad \\phi(x) = \\frac{2\\pi}{3}e^{-x^2}.\n\\end{equation}\n\nEvaluate this quantity to at least six decimal places.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the value of $\\mathrm{Tr}(L^4)$ under the given spin configuration.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Tr_L4: float, value of $\\mathrm{Tr}(L^4)$ for the spin configuration\n        $$\\vec{m}(x) = ( \\sin \\theta \\cos \\phi,\\, \\sin \\theta \\sin \\phi,\\, \\cos \\theta )$$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Tr_L4 = ...\n    # ---------------------------------------------------------------\n\n    return Tr_L4\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import numpy as np\nfrom scipy.fft import fft, ifft\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\mathrm{Tr}(L^4)$ under the given spin configuration.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Tr_L4: float, value of $\\mathrm{Tr}(L^4)$ for the spin configuration\n        $$\\vec{m}(x) = ( \\sin \\theta \\cos \\phi,\\, \\sin \\theta \\sin \\phi,\\, \\cos \\theta )$$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # Numerical spectral method to compute the trace of the Lax operator L^4\n    # Domain size L_p and number of grid points N\n    N = 1024\n    L_p = 40.0\n    x = np.linspace(-L_p / 2, L_p / 2, N, endpoint=False)\n    dx = x[1] - x[0]\n    \n    # Spin configuration\n    theta = x\n    phi = 2 * np.pi / 3 * np.exp(-x**2)\n    \n    m1 = np.sin(theta) * np.cos(phi)\n    m2 = np.sin(theta) * np.sin(phi)\n    m3 = np.cos(theta)\n    \n    # Construct Hilbert transform operator in frequency domain\n    k = np.fft.fftfreq(N, d=dx) * 2 * np.pi\n    H_mult = -1j * np.sign(k)\n    H_mult[0] = 0\n    \n    # Build matrix representation of Hilbert transform H acting on functions\n    H_mat = np.zeros((N, N), dtype=complex)\n    for i in range(N):\n        v = np.zeros(N)\n        v[i] = 1\n        H_mat[:, i] = ifft(H_mult * fft(v))\n        \n    # Tensor product with 2x2 identity for vector-valued functions\n    H_full = np.kron(H_mat, np.eye(2))\n    \n    # Build block-diagonal matrix representation for multiplication by m(x)\n    M_full = np.zeros((2 * N, 2 * N), dtype=complex)\n    for i in range(N):\n        M_full[2 * i : 2 * i + 2, 2 * i : 2 * i + 2] = np.array([\n            [m3[i], m1[i] - 1j * m2[i]],\n            [m1[i] + 1j * m2[i], -m3[i]]\n        ])\n        \n    # Construct Lax operator L = H m - m H acting on 2-component column vectors\n    L_op = H_full @ M_full - M_full @ H_full\n    \n    # Compute L^4 matrix\n    L_op2 = L_op @ L_op\n    L_op4 = L_op2 @ L_op2\n    \n    # Trace of the operator on 2x2 matrices is exactly twice the trace on column vectors.\n    Tr_L4 = float(2 * np.trace(L_op4).real)\n    # ---------------------------------------------------------------\n\n    return Tr_L4"
+    }
+  ]
+}

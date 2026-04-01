@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_50_main",
+  "generated_code": "def answer():\n    def poly_pow(A, k, d):\n        dp = [0] * (d + 1)\n        dp[0] = 1\n        for _ in range(k):\n            new_dp = [0] * (d + 1)\n            for i in range(1, d + 1):\n                if A[i] == 0: continue\n                for j in range(d + 1 - i):\n                    if dp[j] != 0:\n                        new_dp[i + j] += A[i] * dp[j]\n            dp = new_dp\n        return dp\n\n    def invert_series(P, d):\n        Q = [0] * (d + 1)\n        Q[1] = 1 // P[1]\n        for i in range(2, d + 1):\n            s = 0\n            for k in range(2, i + 1):\n                pk = poly_pow(Q, k, d)\n                s += P[k] * pk[i]\n            Q[i] = -s // P[1]\n        return Q\n\n    def poly_mul(A, B, d):\n        C = [0] * (d + 1)\n        for i in range(d + 1):\n            for j in range(d + 1 - i):\n                C[i + j] += A[i] * B[j]\n        return C\n\n    import math\n\n    d = 40\n    # Precompute Catalan\n    C = [0] * (d + 1)\n    for n in range(1, d + 1):\n        C[n] = math.comb(2 * n, n) // (n + 1)\n\n    A = [0] * (d + 1)",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T14:47:11.455838",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_50_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_a8019f59d845",
+      "gene_arxiv_d1aec630df87",
+      "gene_arxiv_603f12bd6f87"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_50_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_a8019f59d845 (source=arxiv)\n  - Introduced agent-specific normalization for RL, improving stability by addressing gradient-norm spikes from global normalization.\n  - Developed a scalable multi-agent orchestration framework enabling flexible LLM sharing and efficient resource scheduling.\n- gene: gene_arxiv_d1aec630df87 (source=arxiv)\n  - Empirical-MCTS框架将结构化搜索与经验记忆优化相结合，实现动态推理。\n  - 引入了PE-EMP，用于实时演化自适应元提示。\n- gene: gene_arxiv_603f12bd6f87 (source=arxiv)\n  - Demonstrates that LLMs struggle to classify flaky tests using only test code, achieving results marginally better than random guessing.\n  - Highlights the lack of sufficient information in test code for flakiness classification, even for human experts.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nLet $S_n $ be the permutation group of order $n$, where $n$ is a positive integer. Consider the following splitting and merging events:\n1. At $ t = 0 $, there is one permutation $ w_0 = (123 \\cdots n) \\in S_n$.\n2. At $ t = 1 $, $ w_0 $ splits into $ w_1 w_2 $.\n3. At $ t = 2 $, first $ w_1 $ splits into $ w_3 w_{4-} $, and $ w_2 $ splits into $ w_{4+} w_5 $. Then $ w_{4\\pm} $ merge into $ w_4 = w_{4-} w_{4+} $.\n4. At $ t = 3 $, the first splitting event is\n  \\begin{equation}\n  w_3 = w_6 w_{7-}, \\quad w_4 = w_{7+} w_{8-}, \\quad w_5 = w_{8+} w_{9-},\n  \\end{equation}\n which is followed by the merging event\n  \\begin{equation}\n  w_7 = w_{7-} w_{7+}, \\quad w_8 = w_{8-} w_{8+}.\n  \\end{equation}\n5. This process continues.\n\nAll the $w$'s are permutations in $S_n$. The pattern is such that at the boundary the permutation just splits, but in the middle the neighboring permutations labeled with $ - $ and $ + $ will merge. Thus, one will end up with one more permutation each time.\n\nSuppose all of these splittings are minimal decompositions defined as follows: Let $ d(g) $ be the minimal number of transpositions in $ g $. $ g = g_1 g_2 $ is a minimal decomposition when the total minimal number of transpositions does not change, i.e.,\n\\begin{equation}\nd(g) = d(g_1) + d(g_2).\n\\end{equation}\nThis holds for any product decomposition in this problem.\n\nLet the number of configurations at time $ t $ be $ a_n(t) $.\n\n# Main problem:\n\nCompute $ a_{40}(3) $. Note that there may be multiple configurations that lead to the same $w_5 $, $ w_6 $, $ w_7$ and $w_8$ at $t = 3$. You should count all of them. Return your answer as an integer.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the number of configurations at time $t=3$\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    a40_3: integer, the number of configurations at time $t=3$, $ a_{40}(3) $\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    a40_3 = ...\n    # ---------------------------------------------------------------\n\n    return a40_3\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    def poly_pow(A, k, d):\n        dp = [0] * (d + 1)\n        dp[0] = 1\n        for _ in range(k):\n            new_dp = [0] * (d + 1)\n            for i in range(1, d + 1):\n                if A[i] == 0: continue\n                for j in range(d + 1 - i):\n                    if dp[j] != 0:\n                        new_dp[i + j] += A[i] * dp[j]\n            dp = new_dp\n        return dp\n\n    def invert_series(P, d):\n        Q = [0] * (d + 1)\n        Q[1] = 1 // P[1]\n        for i in range(2, d + 1):\n            s = 0\n            for k in range(2, i + 1):\n                pk = poly_pow(Q, k, d)\n                s += P[k] * pk[i]\n            Q[i] = -s // P[1]\n        return Q\n\n    def poly_mul(A, B, d):\n        C = [0] * (d + 1)\n        for i in range(d + 1):\n            for j in range(d + 1 - i):\n                C[i + j] += A[i] * B[j]\n        return C\n\n    import math\n\n    d = 40\n    # Precompute Catalan\n    C = [0] * (d + 1)\n    for n in range(1, d + 1):\n        C[n] = math.comb(2 * n, n) // (n + 1)\n\n    A = [0] * (d + 1)"
+    }
+  ]
+}

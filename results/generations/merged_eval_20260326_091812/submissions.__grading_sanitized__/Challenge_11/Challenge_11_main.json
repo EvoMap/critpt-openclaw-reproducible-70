@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_11_main",
+  "generated_code": "import sympy as sp\n\nDelta, x, K, m = sp.symbols('Delta x K m')\n\ndef answer(Delta, x, K, m):\n    r\"\"\"\n    Return the expressions of the beta functions in Sympy format.\n\n    Inputs\n    ----------\n    Delta: sympy.Symbol, coupling constant $\\Delta$\n    x: sympy.Symbol, scaling dimension of $\\Delta$, $x\\equiv [\\Delta]$\n    K: sympy.Symbol, parameter $K$\n    m: sympy.Symbol, parameter $m$\n\n    Outputs\n    ----------\n    beta_Delta: sympy.Expr, beta function for coupling constant $\\Delta$, $\\beta(\\Delta)$\n    beta_x: sympy.Expr, beta function for $x$, $\\beta(x)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    beta_Delta = x * Delta\n    beta_x = -Delta**2 * m**2 * K**2 / 4\n    # ---------------------------------------------------------------\n\n    return beta_Delta, beta_x",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T10:59:01.440380",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_11_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_d1aec630df87",
+      "gene_arxiv_a74e8718438b",
+      "gene_arxiv_0745a5f3ca4e"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_11_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_d1aec630df87 (source=arxiv)\n  - Empirical-MCTS框架将结构化搜索与经验记忆优化相结合，实现动态推理。\n  - 引入了PE-EMP，用于实时演化自适应元提示。\n- gene: gene_arxiv_a74e8718438b (source=arxiv)\n  - 提出了WideSeek-R1，多智能体框架，通过MARL实现宽度扩展。\n  - 发布了包含2万个广泛信息检索任务的大规模数据集。\n- gene: gene_arxiv_0745a5f3ca4e (source=arxiv)\n  - SCA-Net architecture with a Difference Pyramid Block for enhanced multi-scale change detection.\n  - Adaptive Multi-scale Processing Module and multi-level attention mechanisms for refined feature extraction.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider a (1+1)-D Lagrangian that consists of a Majorana fermion $\\chi$ and boson $\\phi$ with compactification radius $\\sqrt{\\frac{K}{m}}$:\n\n$\\\\\nL=\\frac{i}{2}\\bar{\\chi}\\not\\!{\\partial}\\chi+\\frac{m}{2\\pi K}(\\partial_\\mu \\phi)^2+\\frac{\\Delta}{2}i\\bar{\\chi}\\chi\\cos(2m\\phi).\\\\\n$\n\nIn this problem, $x\\equiv [\\Delta]$, where $[\\Delta]$ is the scaling dimension of the coupling constant $\\Delta$\n\n# Main problem:\n\nFind the beta functions for coupling constants $\\Delta$ and $x$ at one-loop level, with the convention that a positive beta function means that the\nsystem flows to strong coupling in the IR.\n\nCode template:\nimport sympy as sp\n\nDelta, x, K, m = sp.symbols('Delta x K m')\n\ndef answer(Delta, x, K, m):\n    r\"\"\"\n    Return the expressions of the beta functions in Sympy format.\n\n    Inputs\n    ----------\n    Delta: sympy.Symbol, coupling constant $\\Delta$\n    x: sympy.Symbol, scaling dimension of $\\Delta$, $x\\equiv [\\Delta]$\n    K: sympy.Symbol, parameter $K$\n    m: sympy.Symbol, parameter $m$\n\n    Outputs\n    ----------\n    beta_Delta: sympy.Expr, beta function for coupling constant $\\Delta$, $\\beta(\\Delta)$\n    beta_x: sympy.Expr, beta function for $x$, $\\beta(x)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    beta_Delta = ...  # a SymPy expression of inputs\n    beta_x = ...      # a SymPy expression of inputs\n    # ---------------------------------------------------------------\n\n    return beta_Delta, beta_x\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\nDelta, x, K, m = sp.symbols('Delta x K m')\n\ndef answer(Delta, x, K, m):\n    r\"\"\"\n    Return the expressions of the beta functions in Sympy format.\n\n    Inputs\n    ----------\n    Delta: sympy.Symbol, coupling constant $\\Delta$\n    x: sympy.Symbol, scaling dimension of $\\Delta$, $x\\equiv [\\Delta]$\n    K: sympy.Symbol, parameter $K$\n    m: sympy.Symbol, parameter $m$\n\n    Outputs\n    ----------\n    beta_Delta: sympy.Expr, beta function for coupling constant $\\Delta$, $\\beta(\\Delta)$\n    beta_x: sympy.Expr, beta function for $x$, $\\beta(x)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    beta_Delta = x * Delta\n    beta_x = -Delta**2 * m**2 * K**2 / 4\n    # ---------------------------------------------------------------\n\n    return beta_Delta, beta_x"
+    }
+  ]
+}

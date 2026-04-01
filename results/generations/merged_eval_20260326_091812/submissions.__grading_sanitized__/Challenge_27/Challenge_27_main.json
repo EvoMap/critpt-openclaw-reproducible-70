@@ -1,0 +1,52 @@
+{
+  "problem_id": "Challenge_27_main",
+  "generated_code": "import numpy as np\nfrom scipy.optimize import minimize_scalar\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\xi^2_{\\rm opt}$ in decibel.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    xi_opt_2: float, the Wineland spin squeezing parameter optimized over time $t$ ($\\xi^2_{\\rm opt}$) in dB\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    N = 10**6\n    chi = 1.0e-6\n    gamma = 0.01\n    gamma_z = 0.01\n\n    # Macroscopic decay rates derived from the Lindbladians:\n    # L_zj = sqrt(gamma_z) S^z_j -> Decay of S_x, S_y is gamma_z / 2\n    # L_+j, L_-j = sqrt(gamma) S^+-_j -> Decay of S_x, S_y is gamma, Decay of S_z is 2 * gamma\n    Gamma_1 = gamma + 0.5 * gamma_z\n    Gamma_2 = 2 * gamma\n\n    def get_xi2(t):\n        # Exact analytical solutions for the 1st and 2nd moments under mean-field approximation:\n        V_y = N/4 + (chi**2 * N**3 / (2 * Gamma_2)) * np.exp(-2 * Gamma_1 * t) * (t - (1 - np.exp(-Gamma_2 * t)) / Gamma_2)\n        C = (chi * N**2 / (2 * Gamma_2)) * np.exp(-Gamma_1 * t) * (1 - np.exp(-Gamma_2 * t))\n        \n        # Minimum variance in the y-z plane perpendicular to the mean spin direction (x-axis)\n        min_var = 0.5 * (V_y + N/4 - np.sqrt((V_y - N/4)**2 + C**2))\n        X = (N/2) * np.exp(-Gamma_1 * t)\n        \n        # Wineland spin-squeezing parameter definition\n        xi2 = N * min_var / (X**2)\n        return xi2\n\n    # Optimize the squeezing parameter over time\n    res = minimize_scalar(get_xi2, bounds=(0, 20), method='bounded')\n    xi_opt_2_linear = res.fun\n    \n    # Convert to decibels and format to 3 significant figures\n    xi_opt_2_dB = 10 * np.log10(xi_opt_2_linear)\n    xi_opt_2 = float(f\"{xi_opt_2_dB:.3g}\")\n    # ---------------------------------------------------------------\n\n    return xi_opt_2",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T12:07:38.116156",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_27_main",
+    "task_topic_tags": [
+      "hamiltonian_inverse_design",
+      "many_body_spin_chain",
+      "matrix_numerical_method"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_arxiv_ebe24f551e12",
+      "gene_arxiv_40ae428cdc9b"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_27_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: hamiltonian_inverse_design, many_body_spin_chain, matrix_numerical_method\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_arxiv_ebe24f551e12 (source=arxiv)\n  - Introduced a data-driven structural reduction of dynamic games that embeds offline-compiled best-response maps to eliminate nested optimization layers and derivative coupling.\n  - Validated the proposed method via large-scale Monte Carlo simulations in a two-player autonomous racing scenario, emphasizing its performance in terms of solution quality and computational efficiency.\n- gene: gene_arxiv_40ae428cdc9b (source=arxiv)\n  - Provides a comprehensive and systematic textbook treatment of multi-agent system control fundamentals\n  - Offers pedagogical, step-by-step analysis of complex topics asymptotic to research-level material\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider a one-axis twisting interaction described by the Hamiltonian $\\hat{H}=\\chi\\hat{S}^z\\hat{S}^z$, where $\\hat{S}^z=\\sum_{j=1}^N \\hat{S}^z_j$ is the total spin operator constructed by summing over $N$ spin-$1/2$ operators. Apart from the one-axis twisting interaction, we also add dissipation terms: single-particle dephasing terms described by Lindblad jump operator $\\hat{L}_{z,j}=\\sqrt{\\gamma_z}\\,\\hat{S}^z_j$ and spin-particle spin-flip terms described by Lindblad jump operators $\\hat{L}_{+,j}=\\sqrt{\\gamma}\\hat{S}^+_j$ and $\\hat{L}_{-,j}=\\sqrt{\\gamma}\\hat{S}^-_j$. The Wineland spin-squeezing parameter is defined as $\\xi^2\\equiv N \\min \\langle\\Delta S_{\\perp}^2\\rangle/|\\langle\\hat{\\mathbf{S}}\\rangle|^2$, where $\\hat{\\mathbf{S}}$ is the total spin vector, and $\\min \\langle\\Delta S_{\\perp}^2\\rangle$ denotes the minimum variance in directions perpendicular to the Bloch vector.\n\n# Main problem:\n\nConsidering the initial state as a coherent spin state pointing in the $+x$ direction, calculate the Wineland spin-squeezing parameter optimized over time $t$ (labelled by $\\xi^2_{\\rm opt}$) based on the following parameters: $N=10^6$, $\\chi=1.0\\times 10^{-6}$, $\\gamma=0.01$, $\\gamma_z=0.01$. You should express the numerical result in terms of decibels and keep up to three significant figures.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the value of $\\xi^2_{\\rm opt}$ in decibel.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    xi_opt_2: float, the Wineland spin squeezing parameter optimized over time $t$ ($\\xi^2_{\\rm opt}$) in dB\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    xi_opt_2 = ...\n    # ---------------------------------------------------------------\n\n    return xi_opt_2\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import numpy as np\nfrom scipy.optimize import minimize_scalar\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\xi^2_{\\rm opt}$ in decibel.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    xi_opt_2: float, the Wineland spin squeezing parameter optimized over time $t$ ($\\xi^2_{\\rm opt}$) in dB\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    N = 10**6\n    chi = 1.0e-6\n    gamma = 0.01\n    gamma_z = 0.01\n\n    # Macroscopic decay rates derived from the Lindbladians:\n    # L_zj = sqrt(gamma_z) S^z_j -> Decay of S_x, S_y is gamma_z / 2\n    # L_+j, L_-j = sqrt(gamma) S^+-_j -> Decay of S_x, S_y is gamma, Decay of S_z is 2 * gamma\n    Gamma_1 = gamma + 0.5 * gamma_z\n    Gamma_2 = 2 * gamma\n\n    def get_xi2(t):\n        # Exact analytical solutions for the 1st and 2nd moments under mean-field approximation:\n        V_y = N/4 + (chi**2 * N**3 / (2 * Gamma_2)) * np.exp(-2 * Gamma_1 * t) * (t - (1 - np.exp(-Gamma_2 * t)) / Gamma_2)\n        C = (chi * N**2 / (2 * Gamma_2)) * np.exp(-Gamma_1 * t) * (1 - np.exp(-Gamma_2 * t))\n        \n        # Minimum variance in the y-z plane perpendicular to the mean spin direction (x-axis)\n        min_var = 0.5 * (V_y + N/4 - np.sqrt((V_y - N/4)**2 + C**2))\n        X = (N/2) * np.exp(-Gamma_1 * t)\n        \n        # Wineland spin-squeezing parameter definition\n        xi2 = N * min_var / (X**2)\n        return xi2\n\n    # Optimize the squeezing parameter over time\n    res = minimize_scalar(get_xi2, bounds=(0, 20), method='bounded')\n    xi_opt_2_linear = res.fun\n    \n    # Convert to decibels and format to 3 significant figures\n    xi_opt_2_dB = 10 * np.log10(xi_opt_2_linear)\n    xi_opt_2 = float(f\"{xi_opt_2_dB:.3g}\")\n    # ---------------------------------------------------------------\n\n    return xi_opt_2"
+    }
+  ]
+}

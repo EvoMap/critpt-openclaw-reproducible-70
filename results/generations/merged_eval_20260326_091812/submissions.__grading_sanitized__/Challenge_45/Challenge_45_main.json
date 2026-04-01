@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_45_main",
+  "generated_code": "def answer(mc_x, mc_y, mv_x, mv_y):\n    r\"\"\"\n    Return the value of the goniopolarity condition.\n\n    Inputs\n    ----------\n    mc_x, mc_y, mv_x, mv_y: float\n        Effective masses $m_{c/v,\\alpha}$ with $\\alpha = x,y$, in unit of a typical carrier mass $m_0$ that is five times of the electron mass.\n\n    Outputs\n    ----------\n    have_goniopolarity: bool\n        True if the material exhibits goniopolarity, otherwise False.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    have_goniopolarity = (mc_x - mv_x) * (mc_y - mv_y) < 0\n    # ---------------------------------------------------------------\n\n    return have_goniopolarity",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T14:01:21.352874",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_45_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_d1aec630df87",
+      "gene_arxiv_74eddb50c07e",
+      "gene_arxiv_603f12bd6f87"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_45_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_d1aec630df87 (source=arxiv)\n  - Empirical-MCTS框架将结构化搜索与经验记忆优化相结合，实现动态推理。\n  - 引入了PE-EMP，用于实时演化自适应元提示。\n- gene: gene_arxiv_74eddb50c07e (source=arxiv)\n  - 提出了一个创新的多智能体框架OSCAgent，用于加速有机太阳能电池分子的发现。\n  - 引入了检索增强设计策略，将外部知识与生成模型相结合，实现更高效的分子生成。\n- gene: gene_arxiv_603f12bd6f87 (source=arxiv)\n  - Demonstrates that LLMs struggle to classify flaky tests using only test code, achieving results marginally better than random guessing.\n  - Highlights the lack of sufficient information in test code for flakiness classification, even for human experts.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nIn goniopolar materials, the thermal power can be n-type in one direction and p-type in another direction.\n\n# Main problem:\nConsider a two-band 2D intrinsic semiconductor under temperature $T$. The conduction band has a dispersion $E_c= \\Delta/2+\\sum_{\\alpha=x,y}\\frac{\\hbar^2k_{\\alpha}^2}{2m_{c,\\alpha}}$, and the valence band has a dispersion $E_v= -\\Delta/2-\\sum_{\\alpha=x,y}\\frac{\\hbar^2k_{\\alpha}^2}{2m_{v,\\alpha}}$, where $\\Delta$ is the size of band gap. We further assume that the relaxation time of the electrons and holes are the same. What condition should the effective mass $m_{c/v,\\alpha}$, with $ \\alpha=x,y$, satisfy to exhibit goniopolarity?\n\nCode template:\ndef answer(mc_x, mc_y, mv_x, mv_y):\n    r\"\"\"\n    Return the value of the goniopolarity condition.\n\n    Inputs\n    ----------\n    mc_x, mc_y, mv_x, mv_y: float\n        Effective masses $m_{c/v,\\alpha}$ with $\\alpha = x,y$, in unit of a typical carrier mass $m_0$ that is five times of the electron mass.\n\n    Outputs\n    ----------\n    have_goniopolarity: bool\n        True if the material exhibits goniopolarity, otherwise False.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    have_goniopolarity = ...\n    # ---------------------------------------------------------------\n\n    return have_goniopolarity\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer(mc_x, mc_y, mv_x, mv_y):\n    r\"\"\"\n    Return the value of the goniopolarity condition.\n\n    Inputs\n    ----------\n    mc_x, mc_y, mv_x, mv_y: float\n        Effective masses $m_{c/v,\\alpha}$ with $\\alpha = x,y$, in unit of a typical carrier mass $m_0$ that is five times of the electron mass.\n\n    Outputs\n    ----------\n    have_goniopolarity: bool\n        True if the material exhibits goniopolarity, otherwise False.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    have_goniopolarity = (mc_x - mv_x) * (mc_y - mv_y) < 0\n    # ---------------------------------------------------------------\n\n    return have_goniopolarity"
+    }
+  ]
+}

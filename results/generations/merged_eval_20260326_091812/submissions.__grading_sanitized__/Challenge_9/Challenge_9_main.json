@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_9_main",
+  "generated_code": "def answer():\n    import numpy as np\n    from scipy.integrate import solve_ivp\n\n    n_val = 80\n    f_val = 0.18\n    M_Pl = 1.0\n    Lambda = 1e-3\n    Lambda4 = Lambda**4\n    \n    # K is the modified kinetic factor due to the Nieh-Yan term after integrating out torsion\n    K = 1.0 + 6.0 * (n_val * f_val / M_Pl)**2\n\n    def V(theta):\n        return Lambda4 * (1.0 - np.cos(theta / f_val))\n\n    def dV(theta):\n        return (Lambda4 / f_val) * np.sin(theta / f_val)\n\n    def derivs(t, y):\n        theta, theta_dot, N = y\n        # Friedmann equation for the Hubble parameter\n        H = np.sqrt(abs(0.5 * K * theta_dot**2 + V(theta)) / (3.0 * M_Pl**2))\n        # Klein-Gordon equation for the scalar field\n        theta_ddot = -3.0 * H * theta_dot - dV(theta) / K\n        return [theta_dot, theta_ddot, H]\n\n    y0 = [7.23, 0.0, 0.0]\n    t_span = (0.0, 2000000.0)\n\n    sol = solve_ivp(derivs, t_span, y0, method='DOP853', rtol=1e-12, atol=1e-12)\n\n    e_folds = sol.y[2][-1]\n\n    return float(e_folds)",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T10:49:47.426988",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_9_main",
+    "task_topic_tags": [
+      "many_body_spin_chain"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_many_body_spin_chain",
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_seed_many_body_spin_chain"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_9_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: many_body_spin_chain\n- gene: gene_topic_many_body_spin_chain (source=run_experience)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_seed_many_body_spin_chain (source=builtin_topic_prior)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\n\nIn order to introduce torsion to the system, one can use the first-order formulation of general relativity. We define a local reference frame at each point of the $(3+1)$-dimensional manifold $\\mathcal{M}$, the tetrad $e^A_\\mu$, such that the metric can be written as $g_{\\mu\\nu}=e^A_\\mu e^B_\\nu \\eta_{AB}$, where $\\eta_{AB}$ is the flat Minkowski metric on the internal space of coordinates. The internal indices, denoted by the Latin alphabet, also run from $0$ to $3$ just like the spacetime ones. The metrics $g_{\\mu\\nu}$ and $\\eta_{AB}$ can raise or lower the spacetime and internal tangent-space indices, respectively. The Levi-Civita symbol shall be denoted by $\\epsilon_{ABCD}$.\n\nThe gravitational action can be reformulated in the first-order form as a function of the tetrad $(e^A)$ and spin-connection variables $(\\omega^{AB})$. Both of these are 1-forms on the manifold $\\mathcal{M}$. In this formalism, the curvature 2-form is\n\\begin{align}\nR^{AB} =d\\omega^{AB} + \\omega^A{}_C\\wedge\\omega^{CB}\\,.\n\\end{align}\n\nStart with the Einstein-Hilbert action $(\\mathcal{S}_{EH})$ in first-order Palatini form, and in first-order Palatini form, add an action term ($\\mathcal{S}_{\\vartheta}$) for a single scalar, $\\vartheta$, with an as-yet unspecified potential that depends on $\\vartheta$, $V(\\vartheta)$. Assume that the scalar $\\vartheta$ depends only on time, $\\vartheta(t)$, and take $c = 1$.\n\nWe add a Nieh-Yan action, which we write as\n\\begin{align}\nS_{NY} = -nf\\int d\\vartheta \\wedge T^A \\wedge e_A,\n\\end{align}\nwhere $T^A$ is the torsion two-form\n\\begin{align}\nT^A =d e^A + \\omega^A{}_B\\wedge e^B\\,.\n\\end{align}\n\nWe introduce the ansatz for the torsion 2-form:\n\\begin{align}\nT^0 =  0,\n\\\\\nT^i = h(t)e^0\\wedge e^i - \\phi(t)\\epsilon^i_{jk} e^j \\wedge e^k.\n\\end{align}\n\nWe split the spin connection into ''Torsion free\" and ''Torsion full\" parts:\n\n\\begin{equation}\n\\omega^{IJ} = \\bar{\\omega}^{IJ} + \\tilde{\\omega}^{IJ}\n\\end{equation}\n\nAssume a FRW geometry. The scale factor is denoted by $a(t)$, where $t$ is the cosmic time and the Hubble parameter is defined as $H(t)$.\n\n\n\n# Main problem:\n\nUse these values in the equations of motions: $n = 80$, $V = \\Lambda^{4}[1-cos(\\vartheta/f)]$, $M_{Pl} = 1$, $\\Lambda = 10^{-3}$, $f = 0.18$, $\\vartheta[t = 0] = 7.23$ and $\\dot{\\vartheta}[t = 0] = 0$, where $\\dot{\\vartheta} = d\\vartheta/dt$, $M_{Pl} = \\frac{1}{\\sqrt{8\\pi G}}$ and $G$ is the gravitational constant.\nUsing these values, give me the number of e-folds achieved at $t = 2000000$.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the number of e-folds achieved at $t = 2000000$.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    e_folds: float, number of e-folds at $t = 2000000$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    e_folds = ...\n    # ---------------------------------------------------------------\n\n    return e_folds\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    import numpy as np\n    from scipy.integrate import solve_ivp\n\n    n_val = 80\n    f_val = 0.18\n    M_Pl = 1.0\n    Lambda = 1e-3\n    Lambda4 = Lambda**4\n    \n    # K is the modified kinetic factor due to the Nieh-Yan term after integrating out torsion\n    K = 1.0 + 6.0 * (n_val * f_val / M_Pl)**2\n\n    def V(theta):\n        return Lambda4 * (1.0 - np.cos(theta / f_val))\n\n    def dV(theta):\n        return (Lambda4 / f_val) * np.sin(theta / f_val)\n\n    def derivs(t, y):\n        theta, theta_dot, N = y\n        # Friedmann equation for the Hubble parameter\n        H = np.sqrt(abs(0.5 * K * theta_dot**2 + V(theta)) / (3.0 * M_Pl**2))\n        # Klein-Gordon equation for the scalar field\n        theta_ddot = -3.0 * H * theta_dot - dV(theta) / K\n        return [theta_dot, theta_ddot, H]\n\n    y0 = [7.23, 0.0, 0.0]\n    t_span = (0.0, 2000000.0)\n\n    sol = solve_ivp(derivs, t_span, y0, method='DOP853', rtol=1e-12, atol=1e-12)\n\n    e_folds = sol.y[2][-1]\n\n    return float(e_folds)"
+    }
+  ]
+}

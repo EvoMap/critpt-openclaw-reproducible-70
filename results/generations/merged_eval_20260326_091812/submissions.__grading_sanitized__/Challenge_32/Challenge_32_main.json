@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_32_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the value of the critical Rayleigh number and associated critical horizontal wavenumber\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, the critical Rayleigh number.\n    k_c: float, the associated critical horizontal wavenumber.\n    ratio_w2T: float, the value of w(z)/T(z) at z=0.67365.\n    \"\"\"\n    import numpy as np\n    from scipy.optimize import minimize_scalar, root_scalar\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    def get_Ra(a):\n        def eq(beta):\n            alpha = np.sqrt(beta**2 + 2 * a**2)\n            return 1.0 + np.cosh(alpha) * np.cos(beta) + (a**2 / (alpha * beta)) * np.sinh(alpha) * np.sin(beta)\n        \n        # The lowest mode beta must lie between pi/2 and pi\n        res = root_scalar(eq, bracket=[0.5 * np.pi, 1.0 * np.pi])\n        beta = res.root\n        L = beta**2 + a**2\n        Ra = (L / a)**2\n        return Ra\n\n    # Minimize Ra over horizontal wavenumber a\n    res = minimize_scalar(get_Ra, bounds=(0.1, 10.0), method='bounded')\n    k_c = float(res.x)\n    Ra_c = float(res.fun)\n\n    # Compute eigenfunctions w(z) and T(z) at the critical wavenumber\n    a = k_c\n    def eq(beta):\n        alpha = np.sqrt(beta**2 + 2 * a**2)\n        return 1.0 + np.cosh(alpha) * np.cos(beta) + (a**2 / (alpha * beta)) * np.sinh(alpha) * np.sin(beta)\n    \n    beta_val = root_scalar(eq, bracket=[0.5 * np.pi, 1.0 * np.pi]).root\n    L = beta_val**2 + a**2\n    alpha = np.sqrt(L + a**2)\n    beta = beta_val\n\n    # Coefficients for the eigenfunction\n    A = np.sinh(alpha) - (alpha / beta) * np.sin(beta)\n    B = -(np.cosh(alpha) + np.cos(beta))\n\n    z = 0.67365\n    \n    # Temperature eigenfunction Theta(z)\n    Theta_z = A * (np.cosh(alpha * z) + np.cos(beta * z)) + B * (np.sinh(alpha * z) - (alpha / beta) * np.sin(beta * z))\n    \n    # Vertical velocity eigenfunction W(z) = -(D^2 - a^2) Theta(z)\n    W_z = -L * (A * (np.cosh(alpha * z) - np.cos(beta * z)) + B * (np.sinh(alpha * z) + (alpha / beta) * np.sin(beta * z)))\n\n    ratio_w2T = float(W_z / Theta_z)\n    # ---------------------------------------------------------------\n\n    return Ra_c, k_c, ratio_w2T",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T12:23:54.147417",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_32_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_0745a5f3ca4e",
+      "gene_arxiv_c63dac094279",
+      "gene_arxiv_423a5ad7fa64"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_32_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_0745a5f3ca4e (source=arxiv)\n  - SCA-Net architecture with a Difference Pyramid Block for enhanced multi-scale change detection.\n  - Adaptive Multi-scale Processing Module and multi-level attention mechanisms for refined feature extraction.\n- gene: gene_arxiv_c63dac094279 (source=arxiv)\n  - Pioneering the use of sparse video generation models for real-world vision-language navigation tasks.\n  - Introducing a structured four-stage training pipeline that optimizes long-horizon supervision and inference efficiency.\n- gene: gene_arxiv_423a5ad7fa64 (source=arxiv)\n  - 提出了动态个性建模与情境推理相结合的框架，解决了现有方法中个性和情境分离的问题。\n  - 设计了双模式系统，支持终端用户和分析师，通过主动学习实现持续改进和个性化推荐。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider natural convection in a porous medium modeled by Darcy's law (i.e., Rayleigh-Darcy convection) with horizontal periodic boundary conditions. The boundary condition on the top wall is free (constant pressure) and at constant temperature. The boundary condition on the bottom wall is impermeable and has constant heat flux.\n\n# Main problem:\n\nWhat is the critical Rayleigh number (allowing $\\pm 0.05$ error) and associated critical horizontal wavenumber (allowing $\\pm 0.02$ error), where, above this critical Rayleigh number, the conduction base state is linearly unstable? Moreover, consider eigenfunction of vertical velocity w(z) and temperature T(z) associated with this critical Rayleigh number and crical horizontal wavenumber, what is the value of w(z)/T(z) at z=0.67365, where the bottom wall is at z=0 and the top wall is at z=1?\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the value of the critical Rayleigh number and associated critical horizontal wavenumber\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, the critical Rayleigh number.\n    k_c: float, the associated critical horizontal wavenumber.\n    ratio_w2T: float, the value of w(z)/T(z) at z=0.67365.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Ra_c = ...\n    k_c = ...\n    ratio_w2T = ...\n    # ---------------------------------------------------------------\n\n    return Ra_c, k_c, ratio_w2T\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the value of the critical Rayleigh number and associated critical horizontal wavenumber\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, the critical Rayleigh number.\n    k_c: float, the associated critical horizontal wavenumber.\n    ratio_w2T: float, the value of w(z)/T(z) at z=0.67365.\n    \"\"\"\n    import numpy as np\n    from scipy.optimize import minimize_scalar, root_scalar\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    def get_Ra(a):\n        def eq(beta):\n            alpha = np.sqrt(beta**2 + 2 * a**2)\n            return 1.0 + np.cosh(alpha) * np.cos(beta) + (a**2 / (alpha * beta)) * np.sinh(alpha) * np.sin(beta)\n        \n        # The lowest mode beta must lie between pi/2 and pi\n        res = root_scalar(eq, bracket=[0.5 * np.pi, 1.0 * np.pi])\n        beta = res.root\n        L = beta**2 + a**2\n        Ra = (L / a)**2\n        return Ra\n\n    # Minimize Ra over horizontal wavenumber a\n    res = minimize_scalar(get_Ra, bounds=(0.1, 10.0), method='bounded')\n    k_c = float(res.x)\n    Ra_c = float(res.fun)\n\n    # Compute eigenfunctions w(z) and T(z) at the critical wavenumber\n    a = k_c\n    def eq(beta):\n        alpha = np.sqrt(beta**2 + 2 * a**2)\n        return 1.0 + np.cosh(alpha) * np.cos(beta) + (a**2 / (alpha * beta)) * np.sinh(alpha) * np.sin(beta)\n    \n    beta_val = root_scalar(eq, bracket=[0.5 * np.pi, 1.0 * np.pi]).root\n    L = beta_val**2 + a**2\n    alpha = np.sqrt(L + a**2)\n    beta = beta_val\n\n    # Coefficients for the eigenfunction\n    A = np.sinh(alpha) - (alpha / beta) * np.sin(beta)\n    B = -(np.cosh(alpha) + np.cos(beta))\n\n    z = 0.67365\n    \n    # Temperature eigenfunction Theta(z)\n    Theta_z = A * (np.cosh(alpha * z) + np.cos(beta * z)) + B * (np.sinh(alpha * z) - (alpha / beta) * np.sin(beta * z))\n    \n    # Vertical velocity eigenfunction W(z) = -(D^2 - a^2) Theta(z)\n    W_z = -L * (A * (np.cosh(alpha * z) - np.cos(beta * z)) + B * (np.sinh(alpha * z) + (alpha / beta) * np.sin(beta * z)))\n\n    ratio_w2T = float(W_z / Theta_z)\n    # ---------------------------------------------------------------\n\n    return Ra_c, k_c, ratio_w2T"
+    }
+  ]
+}

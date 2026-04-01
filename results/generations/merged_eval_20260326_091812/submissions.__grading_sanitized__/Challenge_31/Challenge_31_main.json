@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_31_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the value of critical Rayleigh number and associated critical horizontal wavenumber.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, critical Rayleigh number\n    kx: float, associated critical horizontal wavenumber\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Ra_c = 816.744432\n    kx = 2.214726\n    # ---------------------------------------------------------------\n\n    return Ra_c, kx",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T12:17:31.022880",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_31_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_a74e8718438b",
+      "gene_arxiv_492f3551f2c6",
+      "gene_arxiv_e140337158b8"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_31_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_a74e8718438b (source=arxiv)\n  - 提出了WideSeek-R1，多智能体框架，通过MARL实现宽度扩展。\n  - 发布了包含2万个广泛信息检索任务的大规模数据集。\n- gene: gene_arxiv_492f3551f2c6 (source=arxiv)\n  - 提出了一个基于强化学习的框架（IntentRL），有效解决了深度研究代理在处理用户隐性意图时的自治性与交互性矛盾。\n  - 开发了一个可扩展的数据生成管道，利用Clarification Directed Acyclic Graph (C-DAG)生成高质量的澄清对话样本。\n- gene: gene_arxiv_e140337158b8 (source=arxiv)\n  - The study introduces a controlled experimental framework to assess human-AI collaboration in creativity.\n  - It demonstrates hybrid human-AI groups achieve superior performance and maintain diversity compared to human-only or AI-only groups.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider flow between two parallel plates heated from below and cooled from above (i.e., Rayleigh-Benard convection) with Prandtl number $Pr=1$ and horizontally periodic boundary conditions. The boundary condition on the top wall is free-slip with fixed temperature, and the boundary condition on the bottom wall is no-slip with constant heat flux.\n\n\n# Main problem:\n What are the critical Rayleigh number (allowing $\\pm 0.5$ error) and associated critical horizontal wavenumber (allowing $\\pm 0.02$ error), where above this critical Rayleigh number, the conduction base state is linearly unstable?\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the value of critical Rayleigh number and associated critical horizontal wavenumber.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, critical Rayleigh number\n    kx: float, associated critical horizontal wavenumber\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Ra_c = ...\n    kx = ...\n    # ---------------------------------------------------------------\n\n    return Ra_c, kx\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the value of critical Rayleigh number and associated critical horizontal wavenumber.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Ra_c: float, critical Rayleigh number\n    kx: float, associated critical horizontal wavenumber\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Ra_c = 816.744432\n    kx = 2.214726\n    # ---------------------------------------------------------------\n\n    return Ra_c, kx"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_56_main",
+  "generated_code": "import math\n\ndef answer():\n    hbar = 6.582119569e-16\n    c = 299792458\n    v = 230000\n    rho_local = 0.4e9\n    rho = 178 * rho_local * 1e6\n    hc = hbar * c\n    rho_eV4 = rho * hc**3\n    f = 200\n    m_phi = 2 * math.pi * hbar * f\n    phi_0 = math.sqrt(2 * rho_eV4) / m_phi\n    \n    L = 40000\n    l = 0.06\n    n = 3.5\n    K = L / (n * l * phi_0)\n    K_GeV = K * 1e9\n    \n    Sh = (2e-25)**2\n    T1 = 1000\n    h1 = math.sqrt(Sh / T1)\n    lambda_inv_1 = h1 * K_GeV\n    \n    T2 = 0.7 * 365.25 * 24 * 3600\n    df = f * (v**2) / (c**2) / 2\n    tau = 1 / df\n    h2 = math.sqrt(Sh) / (T2 * tau)**0.25\n    lambda_inv_2 = h2 * K_GeV\n    \n    return [lambda_inv_1, lambda_inv_2]",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T15:52:15.541474",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_56_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_7909a9f4c798",
+      "gene_arxiv_0745a5f3ca4e",
+      "gene_arxiv_9ad94fd06643"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_56_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_7909a9f4c798 (source=arxiv)\n  - Development of SciFlow-Bench, a novel benchmark emphasizing structure-first evaluation for scientific diagrams.\n  - Introduction of a hierarchical multi-agent evaluation pipeline that enforces structural recoverability through a round-trip protocol.\n- gene: gene_arxiv_0745a5f3ca4e (source=arxiv)\n  - SCA-Net architecture with a Difference Pyramid Block for enhanced multi-scale change detection.\n  - Adaptive Multi-scale Processing Module and multi-level attention mechanisms for refined feature extraction.\n- gene: gene_arxiv_9ad94fd06643 (source=arxiv)\n  - Proposes a novel three-layered framework (activity, action, operation) for summarizing and diagnosing the behaviors of LLM-based multi-agent systems.\n  - Introduces a centralized orchestrator and natural language probing techniques to extract structured summaries from agent behaviors.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider a scalar field $\\phi$ linearly coupled to the standard model electromagnetic field with coupling strength $\\Lambda_\\gamma^{-1}$. We can write the interaction term of the Lagrangian as $\\mathcal{L}_\\text{int}=\\frac{\\phi}{4 \\Lambda_\\gamma}F^{\\mu\\nu}F_{\\mu\\nu}$. Assuming the scalar field makes up all the dark matter, it may induce observable effects in laser interferometers. We consider signals of scalar field in the Cosmic Explorer, whose planned strain sensitivity is about $2\\times 10^{-25}\\, \\text{Hz}^{-1/2}$ in the frequency range of $50\\,\\text{Hz} \\leq f \\leq 500\\,\\text{Hz}$. The interferometer arm length of Cosmic Explorer is designed to be $40\\, \\text{km}$. We assume the Cosmic Explorer uses a similar beamsplitter as LIGO, with thickness $6\\,\\text{cm}$ and index of refraction $3.5$.\n\n# Main problem:\n\nIf there is an overdensity of dark matter at the device that is $178$ times the local dark matter density (take the local dark matter density to be $0.4\\,\\text{GeV}/\\text{cm}^3$ and velocity to be $230\\,\\text{km}/\\text{s}$), what is the smallest $\\Lambda_\\gamma^{-1}$ the Cosmic Explorer can probe at $200\\,\\text{Hz}$ with a signal-to-noise ratio of 1 and with an observation time of $1000\\,\\text{s}$ or $ 0.7\\,\\text{yrs}$, respectively? Keep at least three significant digits in the final result.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the values of the smallest $\\Lambda_\\gamma^{-1}$.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    lambda_inv: list[float]\n        Smallest coupling strength $\\Lambda_\\gamma^{-1}$ the Cosmic Explorer can probe at 200 Hz\n        with an observation time of $\\{1000\\,\\text{s}, 0.7\\,\\text{yrs}\\}$ and a signal-to-noise of 1.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    lambda_inv = ...\n    # ---------------------------------------------------------------\n\n    return lambda_inv\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import math\n\ndef answer():\n    hbar = 6.582119569e-16\n    c = 299792458\n    v = 230000\n    rho_local = 0.4e9\n    rho = 178 * rho_local * 1e6\n    hc = hbar * c\n    rho_eV4 = rho * hc**3\n    f = 200\n    m_phi = 2 * math.pi * hbar * f\n    phi_0 = math.sqrt(2 * rho_eV4) / m_phi\n    \n    L = 40000\n    l = 0.06\n    n = 3.5\n    K = L / (n * l * phi_0)\n    K_GeV = K * 1e9\n    \n    Sh = (2e-25)**2\n    T1 = 1000\n    h1 = math.sqrt(Sh / T1)\n    lambda_inv_1 = h1 * K_GeV\n    \n    T2 = 0.7 * 365.25 * 24 * 3600\n    df = f * (v**2) / (c**2) / 2\n    tau = 1 / df\n    h2 = math.sqrt(Sh) / (T2 * tau)**0.25\n    lambda_inv_2 = h2 * K_GeV\n    \n    return [lambda_inv_1, lambda_inv_2]"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "problem_id": "Challenge_16_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the value of the critical interaction strength $U_c$\n    that causes a phase transition at quarter-filling of the system\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    U_c: float, critical interaction strength\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # At quarter-filling of the total system (half-filling of the lower band), \n    # the Fermi surface lies exactly at a two-dimensional saddle point where the \n    # density of states diverges logarithmically (a van Hove singularity). \n    # By the Stoner criterion, an infinite density of states at the Fermi level \n    # implies that the critical interaction strength required to trigger an \n    # instability (like a spin-density wave) is zero.\n    U_c = 0.0\n    # ---------------------------------------------------------------\n\n    return U_c",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T11:22:24.976520",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_16_main",
+    "task_topic_tags": [
+      "hamiltonian_inverse_design",
+      "many_body_spin_chain"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_seed_many_body_spin_chain",
+      "gene_topic_many_body_spin_chain"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_16_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: hamiltonian_inverse_design, many_body_spin_chain\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_seed_many_body_spin_chain (source=builtin_topic_prior)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_many_body_spin_chain (source=run_experience)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider the following Hamiltonian in two dimensions on a square lattice:\n\\begin{equation}\n\\begin{aligned}\nH &= 2\\sum_{{\\bf k}\\sigma}(\\cos{k_x}-\\cos{k_y})(c^\\dagger_{1{\\bf k}\\sigma}c_{1{\\bf k}\\sigma}-c^\\dagger_{2{\\bf k}\\sigma}c_{2{\\bf k}\\sigma})\\\\&+\\sqrt{2}\\sum_{{\\bf k}\\sigma}[\\text{e}^{i\\pi/4}(1+\\text{e}^{i(k_y-k_x)})+\\text{e}^{-i\\pi/4}(\\text{e}^{-ik_x}+\\text{e}^{ik_y})]c^\\dagger_{1{\\bf k}\\sigma}c_{2{\\bf k}\\sigma}\\\\&+\\sqrt{2}\\sum_{{\\bf k}\\sigma}[\\text{e}^{-i\\pi/4}(1+\\text{e}^{-i(k_y-k_x)})+\\text{e}^{i\\pi/4}(\\text{e}^{ik_x}+\\text{e}^{-ik_y})]c^\\dagger_{2{\\bf k}\\sigma}c_{1{\\bf k}\\sigma}\n\\\\&-\\mu\\sum_{{\\bf k}\\sigma}(c^\\dagger_{1{\\bf k}\\sigma}c_{1{\\bf k}\\sigma}+c^\\dagger_{2{\\bf k}\\sigma}c_{2{\\bf k}\\sigma})\n\\\\&+U\\sum_{{\\bf k}}(c^\\dagger_{1{\\bf k}\\uparrow}c_{1{\\bf k}\\uparrow}c^\\dagger_{1{\\bf k}\\downarrow}c_{1{\\bf k}\\downarrow}+c^\\dagger_{2{\\bf k}\\uparrow}c_{2{\\bf k}\\uparrow}c^\\dagger_{2{\\bf k}\\downarrow}c_{2{\\bf k}\\downarrow}),\n\\end{aligned}\n\\end{equation}\nwhere $c^\\dagger$ is the creation operator; $c$ is the annihilation operator; labels 1,2 denote sublattices 1 and 2; $\\bf{k}$ is momentum;   $\\sigma=\\uparrow \\text{or} \\downarrow$ represents the spin; and $\\mu$ is the chemical potential with repulsive interaction $U>0$.\n\n# Main problem:\n\nCalculate the critical interaction strength $U_c$ that causes a phase transition at quarter-filling of the system. Please be as accurate as possible.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the value of the critical interaction strength $U_c$\n    that causes a phase transition at quarter-filling of the system\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    U_c: float, critical interaction strength\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    U_c = ...\n    # ---------------------------------------------------------------\n\n    return U_c\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the value of the critical interaction strength $U_c$\n    that causes a phase transition at quarter-filling of the system\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    U_c: float, critical interaction strength\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # At quarter-filling of the total system (half-filling of the lower band), \n    # the Fermi surface lies exactly at a two-dimensional saddle point where the \n    # density of states diverges logarithmically (a van Hove singularity). \n    # By the Stoner criterion, an infinite density of states at the Fermi level \n    # implies that the critical interaction strength required to trigger an \n    # instability (like a spin-density wave) is zero.\n    U_c = 0.0\n    # ---------------------------------------------------------------\n\n    return U_c"
+    }
+  ]
+}

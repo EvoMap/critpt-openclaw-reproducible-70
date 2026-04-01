@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_12_main",
+  "generated_code": "import sympy as sp\n\nt, k_12, k_13, k_23, k_34, N, q = sp.symbols('t k_{12} k_{13} k_{23} k_{34} N q')\n\ndef answer(t, k_12, k_13, k_23, k_34, N, q):\n    r\"\"\"\n    Return the expression of the phase between $|\\psi^i(q)\\rangle$ and $|\\psi^f(q)\\rangle$ in Sympy format.\n\n    Inputs\n    ----------\n    t: sympy.Symbol, tunneling amplitude $t$\n    k_12, k_13, k_23, k_34: sympy.Symbol, ground-state fusion channels\n          $k_{ij}\\in Z_N$ with $k_{ij}<-\\frac{\\phi_{ij}}{2\\pi}<k_{ij}+1$\n    N: sympy.Symbol, integer N defining $Z_N$\n    q: sympy.Symbol, fusion channel between the unpaired zero modes\n\n    Outputs\n    ----------\n    phase: sympy.Expr, the expression of the phase between the initial ground state $|\\psi^i(q)\\rangle$\n          and final ground state $|\\psi^f(q)\\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The total accumulated phase combining the geometric braiding of the zero modes, \n    # the Aharonov-Bohm flux through the 1-2-3 loop, and the final state permutation\n    phase = 2 * sp.pi / N * (q + k_34 + k_12 + k_23 - k_13)\n    # ---------------------------------------------------------------\n\n    return phase",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T11:08:36.759727",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_12_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_c63dac094279",
+      "gene_arxiv_e140337158b8",
+      "gene_arxiv_0745a5f3ca4e"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_12_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_c63dac094279 (source=arxiv)\n  - Pioneering the use of sparse video generation models for real-world vision-language navigation tasks.\n  - Introducing a structured four-stage training pipeline that optimizes long-horizon supervision and inference efficiency.\n- gene: gene_arxiv_e140337158b8 (source=arxiv)\n  - The study introduces a controlled experimental framework to assess human-AI collaboration in creativity.\n  - It demonstrates hybrid human-AI groups achieve superior performance and maintain diversity compared to human-only or AI-only groups.\n- gene: gene_arxiv_0745a5f3ca4e (source=arxiv)\n  - SCA-Net architecture with a Difference Pyramid Block for enhanced multi-scale change detection.\n  - Adaptive Multi-scale Processing Module and multi-level attention mechanisms for refined feature extraction.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider $Z_N$ ($N$ is any integer) parafermion zero-mode operators on four sites $\\alpha_i$ with $i=1,2,3,4$ and a four-stage tunneling process described by\n\n$\nH_{34}\\rightarrow H_{23} \\rightarrow H_{12}\\rightarrow H_{13}\\rightarrow H_{34},\n$\n\nwhere\n$\nH_{ij}=t\\left(e^{-i\\phi_{ij}/N}\\alpha_i^\\dagger\\alpha_j+H.c.\\right)\n$, $\\phi_{ij}$ is a phase between sites $i$ and $j$, and $H.c.$ stands for Hermitian conjugate. This tunneling process is followed by a permutation between zero modes $(\\alpha_1,\\alpha_2)$ and $(\\alpha_3,\\alpha_4)$, respectively.\n\n# Main problem:\nFind the phase between the initial ground state of the process $|\\psi^i(q)\\rangle$ and final ground state of the process $|\\psi^f(q)\\rangle$, where $q$ is the fusion channel between the unpaired zero modes. Your answer should depend on $k_{ij}\\in Z_N$, where $k_{ij}<-\\frac{\\phi_{ij}}{2\\pi}<k_{ij}+1$. Note that, for a Josephson phase between sites i and j, k_ij is a ground-state fusion channel.\n\nCode template:\nimport sympy as sp\n\nt, k_12, k_13, k_23, k_34, N, q = sp.symbols('t k_{12} k_{13} k_{23} k_{34} N q')\n\ndef answer(t, k_12, k_13, k_23, k_34, N, q):\n    r\"\"\"\n    Return the expression of the phase between $|\\psi^i(q)\\rangle$ and $|\\psi^f(q)\\rangle$ in Sympy format.\n\n    Inputs\n    ----------\n    t: sympy.Symbol, tunneling amplitude $t$\n    k_12, k_13, k_23, k_34: sympy.Symbol, ground-state fusion channels\n          $k_{ij}\\in Z_N$ with $k_{ij}<-\\frac{\\phi_{ij}}{2\\pi}<k_{ij}+1$\n    N: sympy.Symbol, integer N defining $Z_N$\n    q: sympy.Symbol, fusion channel between the unpaired zero modes\n\n    Outputs\n    ----------\n    phase: sympy.Expr, the expression of the phase between the initial ground state $|\\psi^i(q)\\rangle$\n          and final ground state $|\\psi^f(q)\\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    phase = ...  # a SymPy expression of the inputs\n    # ---------------------------------------------------------------\n\n    return phase\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\nt, k_12, k_13, k_23, k_34, N, q = sp.symbols('t k_{12} k_{13} k_{23} k_{34} N q')\n\ndef answer(t, k_12, k_13, k_23, k_34, N, q):\n    r\"\"\"\n    Return the expression of the phase between $|\\psi^i(q)\\rangle$ and $|\\psi^f(q)\\rangle$ in Sympy format.\n\n    Inputs\n    ----------\n    t: sympy.Symbol, tunneling amplitude $t$\n    k_12, k_13, k_23, k_34: sympy.Symbol, ground-state fusion channels\n          $k_{ij}\\in Z_N$ with $k_{ij}<-\\frac{\\phi_{ij}}{2\\pi}<k_{ij}+1$\n    N: sympy.Symbol, integer N defining $Z_N$\n    q: sympy.Symbol, fusion channel between the unpaired zero modes\n\n    Outputs\n    ----------\n    phase: sympy.Expr, the expression of the phase between the initial ground state $|\\psi^i(q)\\rangle$\n          and final ground state $|\\psi^f(q)\\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The total accumulated phase combining the geometric braiding of the zero modes, \n    # the Aharonov-Bohm flux through the 1-2-3 loop, and the final state permutation\n    phase = 2 * sp.pi / N * (q + k_34 + k_12 + k_23 - k_13)\n    # ---------------------------------------------------------------\n\n    return phase"
+    }
+  ]
+}

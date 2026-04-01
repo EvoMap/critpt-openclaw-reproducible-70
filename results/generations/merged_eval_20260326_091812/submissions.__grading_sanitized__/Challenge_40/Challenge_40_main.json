@@ -1,0 +1,52 @@
+{
+  "problem_id": "Challenge_40_main",
+  "generated_code": "import sympy as sp\n\nchi, kappa, sigma, k = sp.symbols('chi kappa sigma k', real=True)\n\ndef answer(chi, kappa, sigma, k):\n    r\"\"\"\n    Return the expression of hydrodynamic mode spectrum $\\omega(k)$ in Sympy format.\n\n    Inputs\n    ----------\n    chi: sympy.Symbol, charge susceptibility, $\\chi$\n    kappa: sympy.Symbol, quadrupole superfluid stiffness, $\\kappa$\n    sigma: sympy.Symbol, coefficient of the leading order dissipative term, $\\sigma$\n    k: sympy.Symbol, momentum, $k$\n\n    Outputs\n    ----------\n    omega: set[sympy.Expr], a set of hydrodynamic mode dispersion relation(s), $\\omega(k)$\n    \"\"\"\n    disc = -sigma**2 * k**12 / chi**2 + 4 * kappa * k**6 / chi\n    omega_1 = (-sp.I * sigma * k**6 / chi + sp.sqrt(disc)) / 2\n    omega_2 = (-sp.I * sigma * k**6 / chi - sp.sqrt(disc)) / 2\n    omega = {omega_1, omega_2}\n    \n    return omega",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T13:35:48.527042",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_40_main",
+    "task_topic_tags": [
+      "symbolic_derivation",
+      "hamiltonian_inverse_design",
+      "holography_field_theory"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_symbolic_derivation",
+      "gene_arxiv_5be1354332a5",
+      "gene_arxiv_07dc21c71744"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_40_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: symbolic_derivation, hamiltonian_inverse_design, holography_field_theory\n- gene: gene_topic_symbolic_derivation (source=run_experience)\n  - 优先进行符号化推导并在最终表达式前做等价化简，避免冗余形式导致判题失败。\n  - 先确认张量定义和迹运算约定，再输出系数列表，避免项顺序错配。\n- gene: gene_arxiv_5be1354332a5 (source=arxiv)\n  - 提出了一种基于LLM的幸福教练的应用，拓展了AI在心理社会支持领域的研究。\n  - 通过长时间对话分析，揭示了人机交互动态，包括用户自主性、情感披露和谈判等重要模式。\n- gene: gene_arxiv_07dc21c71744 (source=arxiv)\n  - Unification of Cognitive Hierarchy and Level-$k$ models via a network bias parameter $p$.\n  - Theoretical demonstration of the Sophisticated Bias induced by network opacity.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nEffective field theory is a powerful tool used to construct phenomenological models via symmetries. The method has recently been extended to dissipative systems via the Schwinger-Keldysh formalism. In this problem we will study the dissipative effective field theory associated to spontaneous symmetry breaking of multipolar $U(1)$ symmetries.\n\n\nConsider a $1d$ system with a conserved density $N = \\int \\rho$, conserved dipole moments $D = \\int x \\rho$, and a conserved quadrupole moment $Q = \\int x^2 \\rho$. Assume that these are the only conserved quantities in the system.\n\nSuppose that the quadrupole $Q$ generator is spontaneously broken, and the charge $N$ and dipole $D$ generators are unbroken.\n\n# Main problem:\n\nCompute the spectrum of hydrodynamic modes $\\omega(k)$.\n\nLet $\\chi$ be the charge susceptibility, $\\kappa$ be the quadrupole superfluid stiffness, and $\\sigma$ be the coefficient of the leading order dissipative term. You may assume all other EFT coefficients are zero. Express your answer in terms of $\\chi$, $\\kappa$, and $\\sigma$.\n\nCode template:\nimport sympy as sp\n\nchi, kappa, sigma, k = sp.symbols('chi kappa sigma k', real=True)\n\ndef answer(chi, kappa, sigma, k):\n    r\"\"\"\n    Return the expression of hydrodynamic mode spectrum $\\omega(k)$ in Sympy format.\n\n    Inputs\n    ----------\n    chi: sympy.Symbol, charge susceptibility, $\\chi$\n    kappa: sympy.Symbol, quadrupole superfluid stiffness, $\\kappa$\n    sigma: sympy.Symbol, coefficient of the leading order dissipative term, $\\sigma$\n    k: sympy.Symbol, momentum, $k$\n\n    Outputs\n    ----------\n    omega: set[sympy.Expr], a set of hydrodynamic mode dispersion relation(s), $\\omega(k)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    omega = ...  # a set of SymPy expression of inputs\n    # ---------------------------------------------------------------\n\n    return omega\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\nchi, kappa, sigma, k = sp.symbols('chi kappa sigma k', real=True)\n\ndef answer(chi, kappa, sigma, k):\n    r\"\"\"\n    Return the expression of hydrodynamic mode spectrum $\\omega(k)$ in Sympy format.\n\n    Inputs\n    ----------\n    chi: sympy.Symbol, charge susceptibility, $\\chi$\n    kappa: sympy.Symbol, quadrupole superfluid stiffness, $\\kappa$\n    sigma: sympy.Symbol, coefficient of the leading order dissipative term, $\\sigma$\n    k: sympy.Symbol, momentum, $k$\n\n    Outputs\n    ----------\n    omega: set[sympy.Expr], a set of hydrodynamic mode dispersion relation(s), $\\omega(k)$\n    \"\"\"\n    disc = -sigma**2 * k**12 / chi**2 + 4 * kappa * k**6 / chi\n    omega_1 = (-sp.I * sigma * k**6 / chi + sp.sqrt(disc)) / 2\n    omega_2 = (-sp.I * sigma * k**6 / chi - sp.sqrt(disc)) / 2\n    omega = {omega_1, omega_2}\n    \n    return omega"
+    }
+  ]
+}

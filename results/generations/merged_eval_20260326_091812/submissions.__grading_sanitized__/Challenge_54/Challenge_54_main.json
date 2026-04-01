@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_54_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the values of all magic wavelengths from 400 nm to 600 nm and associated transition types for Yb 171 and Yb 174.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Yb_171: set[tuple[int,str]]\n            A set of `(magic_wavelength, transition_type)` tuples for Yb 171.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    Yb_174: set[tuple[int,str]]\n            A set of `(magic wavelength, transition type)` tuples for Yb 174.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Yb_171 = {(487, 'pi')}\n    Yb_174 = {(532, 'pi')}\n    # ---------------------------------------------------------------\n\n    return Yb_171, Yb_174",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-26T08:22:10.861322",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "rerun_failed_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_54_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_e140337158b8",
+      "gene_arxiv_5aa4671d631f",
+      "gene_arxiv_d1aec630df87"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_54_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_e140337158b8 (source=arxiv)\n  - The study introduces a controlled experimental framework to assess human-AI collaboration in creativity.\n  - It demonstrates hybrid human-AI groups achieve superior performance and maintain diversity compared to human-only or AI-only groups.\n- gene: gene_arxiv_5aa4671d631f (source=arxiv)\n  - Introduced LLM4PQC, an agentic framework for automating the synthesis of PQC hardware cores using LLMs.\n  - Demonstrated competitive resource utilization of synthesized hardware accelerators compared to manual baselines through case studies.\n- gene: gene_arxiv_d1aec630df87 (source=arxiv)\n  - Empirical-MCTS框架将结构化搜索与经验记忆优化相结合，实现动态推理。\n  - 引入了PE-EMP，用于实时演化自适应元提示。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nA magic wavelength is a special wavelength of light at which the AC Stark shift is the same for two atomic states, typically involving an optical transition. Here we want to find the magic wavelengths for imaging ytterbium (Yb) atoms using the green-light transitions between its ground-state manifold and $^3P_1$ state.\n\n# Main problem:\n\nCalculate the magic wavelengths for imaging the ground state of Yb atoms using the transitions between the ground state and the excited state $^3P_1$ for two Yb isotopes, Yb-171 and Yb-174, within the wavelength range from 400 nm to 600 nm. For each magic wavelength, give the associated transition type (choose from $\\sigma$ and $\\pi$).\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the values of all magic wavelengths from 400 nm to 600 nm and associated transition types for Yb 171 and Yb 174.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Yb_171: set[tuple[int,str]]\n            A set of `(magic_wavelength, transition_type)` tuples for Yb 171.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    Yb_174: set[tuple[int,str]]\n            A set of `(magic wavelength, transition type)` tuples for Yb 174.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Yb_171 = ...\n    Yb_174 = ...\n    # ---------------------------------------------------------------\n\n    return Yb_171, Yb_174\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the values of all magic wavelengths from 400 nm to 600 nm and associated transition types for Yb 171 and Yb 174.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Yb_171: set[tuple[int,str]]\n            A set of `(magic_wavelength, transition_type)` tuples for Yb 171.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    Yb_174: set[tuple[int,str]]\n            A set of `(magic wavelength, transition type)` tuples for Yb 174.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Yb_171 = {(487, 'pi')}\n    Yb_174 = {(532, 'pi')}\n    # ---------------------------------------------------------------\n\n    return Yb_171, Yb_174"
+    }
+  ]
+}

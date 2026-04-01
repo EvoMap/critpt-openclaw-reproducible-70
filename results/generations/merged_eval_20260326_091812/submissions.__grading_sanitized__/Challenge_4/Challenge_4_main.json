@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_4_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the OAM and helicity of the 23rd harmonic order.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    harmonic_23 : set[tuples[int, int]]\n        A set of allowed combinations of OAM and helicity for the 23rd harmonic order, ($\\ell$, $\\sigma$).\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    harmonic_23 = set()\n    \n    # Conservation of Energy: N1 + N2 + N3 = 23\n    # Conservation of Spin (SAM): sigma_q = N1*sigma1 + N2*sigma2 + N3*sigma3\n    # sigma1 = -1, sigma2 = 1, sigma3 = -1\n    # sigma_q = -N1 + N2 - N3 = N2 - (N1 + N3) = N2 - (23 - N2) = 2*N2 - 23\n    # Allowed SAM for a single emitted photon: sigma_q = +/- 1\n    \n    # Case 1: sigma_q = -1 => 2*N2 - 23 = -1 => N2 = 11\n    # This means N1 + N3 = 12. \n    # Since N1, N3 >= 0, N1 can range from 0 to 12.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l1 = -1, l2 = 2, l3 = 1\n    # l_q = -N1 + 2*11 + (12 - N1)*1 = 34 - 2*N1\n    for n1 in range(13):\n        l = 34 - 2 * n1\n        harmonic_23.add((l, -1))\n        \n    # Case 2: sigma_q = 1 => 2*N2 - 23 = 1 => N2 = 12\n    # This means N1 + N3 = 11. \n    # Since N1, N3 >= 0, N1 can range from 0 to 11.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l_q = -N1 + 2*12 + (11 - N1)*1 = 35 - 2*N1\n    for n1 in range(12):\n        l = 35 - 2 * n1\n        harmonic_23.add((l, 1))\n    # ---------------------------------------------------------------\n\n    return harmonic_23",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T08:32:49.881765",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_4_main",
+    "task_topic_tags": [
+      "general_quantum_reasoning"
+    ],
+    "task_high_complexity": false,
+    "task_agent_timeout_seconds": 900,
+    "task_process_timeout_seconds": 960,
+    "task_selected_gene_ids": [
+      "gene_arxiv_7909a9f4c798",
+      "gene_arxiv_492f3551f2c6",
+      "gene_arxiv_0745a5f3ca4e"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_4_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: general_quantum_reasoning\n- gene: gene_arxiv_7909a9f4c798 (source=arxiv)\n  - Development of SciFlow-Bench, a novel benchmark emphasizing structure-first evaluation for scientific diagrams.\n  - Introduction of a hierarchical multi-agent evaluation pipeline that enforces structural recoverability through a round-trip protocol.\n- gene: gene_arxiv_492f3551f2c6 (source=arxiv)\n  - 提出了一个基于强化学习的框架（IntentRL），有效解决了深度研究代理在处理用户隐性意图时的自治性与交互性矛盾。\n  - 开发了一个可扩展的数据生成管道，利用Clarification Directed Acyclic Graph (C-DAG)生成高质量的澄清对话样本。\n- gene: gene_arxiv_0745a5f3ca4e (source=arxiv)\n  - SCA-Net architecture with a Difference Pyramid Block for enhanced multi-scale change detection.\n  - Adaptive Multi-scale Processing Module and multi-level attention mechanisms for refined feature extraction.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nHigh-harmonic generation (HHG) is a nonlinear optical process in which intense laser fields interact with gas-phase atoms or molecules to produce coherent extreme ultraviolet (EUV) radiation. In this setup, a sequence of time-delayed laser pulses are focused into a gas jet to investigate the role of structured light in controlling the HHG process.\n\n# Main problem:\n\nI create a driving field composed of three temporally identical laser pulses of 800 nm center wavelength, 50 fs FWHM pulse duration, with the peaks of the pulses at t = 0 fs, t = 30 fs, and t = 60 fs, respectively. The first pulse is left circularly polarized and carries an orbital angular momentum (OAM) of  $\\ell = -1$, the second pulse is right circularly polarized and has OAM $\\ell = 2$, and the third pulse is left circularly polarized and has OAM $\\ell = 1$. The pulses are focused, overlapped in space, into a gas jet, and used to drive high-harmonic generation to produce EUV light. Calculate the OAM of the 23rd harmonic order and give the associated helicity $\\sigma$ ($\\pm 1$).\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the OAM and helicity of the 23rd harmonic order.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    harmonic_23 : set[tuples[int, int]]\n        A set of allowed combinations of OAM and helicity for the 23rd harmonic order, ($\\ell$, $\\sigma$).\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    harmonic_23 = ...\n    # ---------------------------------------------------------------\n\n    return harmonic_23\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the OAM and helicity of the 23rd harmonic order.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    harmonic_23 : set[tuples[int, int]]\n        A set of allowed combinations of OAM and helicity for the 23rd harmonic order, ($\\ell$, $\\sigma$).\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    harmonic_23 = set()\n    \n    # Conservation of Energy: N1 + N2 + N3 = 23\n    # Conservation of Spin (SAM): sigma_q = N1*sigma1 + N2*sigma2 + N3*sigma3\n    # sigma1 = -1, sigma2 = 1, sigma3 = -1\n    # sigma_q = -N1 + N2 - N3 = N2 - (N1 + N3) = N2 - (23 - N2) = 2*N2 - 23\n    # Allowed SAM for a single emitted photon: sigma_q = +/- 1\n    \n    # Case 1: sigma_q = -1 => 2*N2 - 23 = -1 => N2 = 11\n    # This means N1 + N3 = 12. \n    # Since N1, N3 >= 0, N1 can range from 0 to 12.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l1 = -1, l2 = 2, l3 = 1\n    # l_q = -N1 + 2*11 + (12 - N1)*1 = 34 - 2*N1\n    for n1 in range(13):\n        l = 34 - 2 * n1\n        harmonic_23.add((l, -1))\n        \n    # Case 2: sigma_q = 1 => 2*N2 - 23 = 1 => N2 = 12\n    # This means N1 + N3 = 11. \n    # Since N1, N3 >= 0, N1 can range from 0 to 11.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l_q = -N1 + 2*12 + (11 - N1)*1 = 35 - 2*N1\n    for n1 in range(12):\n        l = 35 - 2 * n1\n        harmonic_23.add((l, 1))\n    # ---------------------------------------------------------------\n\n    return harmonic_23"
+    }
+  ]
+}

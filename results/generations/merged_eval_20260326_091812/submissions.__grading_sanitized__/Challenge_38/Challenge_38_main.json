@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_38_main",
+  "generated_code": "import sympy as sp\n\nT, U = sp.symbols('T U')\n\ndef answer(T):\n    \"\"\"\n    Return the temperature dependence of the energy phase space integral in SymPy format.\n\n    Inputs\n    ----------\n    T: sympy.Symbol, temperature $T$\n    U: sympy.Symbol, on-site interaction strength $U$\n\n    Outputs\n    ----------\n    I: sympy.Expr, the energy phase space integral, $I(T)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    I = T\n    # ---------------------------------------------------------------\n\n    return I",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T13:24:22.672068",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_38_main",
+    "task_topic_tags": [
+      "hamiltonian_inverse_design"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_seed_hamiltonian_inverse_design",
+      "gene_arxiv_d1f31e389916"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_38_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: hamiltonian_inverse_design\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_seed_hamiltonian_inverse_design (source=builtin_topic_prior)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n- gene: gene_arxiv_d1f31e389916 (source=arxiv)\n  - 引入代理模型和演化博弈论来分析AI对文化演变的影响。\n  - 提出AI补充策略可以促进文化创新和长期积累。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nThe Hamiltonian for the Hatsugai-Kohmoto (HK) model is\n$$\nH = \\sum_{k,\\sigma} (\\varepsilon_k-\\mu) n_{k \\sigma} + U \\sum_{k}n_{k \\uparrow} n_{k \\downarrow}.\n$$\nThe first term represents the non-interacting part, which corresponds to a non-interacting band $0<\\varepsilon_k<W$, and the second term represents the interaction.\nWe further add a perturbation term, which preserves momentum and respects fermion symmetries:\n$$\nH' = \\sum_{2,3,4}V(1,2,3,4) \\delta_{k_1+k_2,k_3+k_4}c^{\\dagger}_4 c^{\\dagger}_3 c_2 c_1,\n$$\nwhere the index $i \\equiv (k_i, \\sigma_i)$ and the scattering process can be understood as $1 \\rightarrow \\bar{2} + 3+4$ and $\\bar{2} + 3+4 \\rightarrow 1$.\nThe energy phase space integral of the scattering rate of the propagating modes of the HK model is given by\n\\begin{equation}\n    I(T)=\\langle n_2 (1-n_3)(1-n_4)+(1- n_2) n_3n_4 \\rangle_{\\epsilon_2,\\epsilon_3,\\epsilon_4}=\\int d\\epsilon_2 d\\epsilon_3 d\\epsilon_4 \\langle n_2 (1-n_3)(1-n_4)+(1- n_2) n_3n_4 \\rangle \\delta(\\epsilon_1+\\epsilon_2-\\epsilon_3-\\epsilon_4).\n\\end{equation}\n\n# Main problem:\n\nCompute the temperature dependence of the energy phase space integral in the limit $U\\gg W\\gg k_BT\\gg \\epsilon_1$, where the chemical potential $\\mu$ only crosses the lower Hubbard band, i.e., $0<\\mu<W$.\n\nCode template:\nimport sympy as sp\n\nT, U = sp.symbols('T U')\n\ndef answer(T):\n    \"\"\"\n    Return the temperature dependence of the energy phase space integral in SymPy format.\n\n    Inputs\n    ----------\n    T: sympy.Symbol, temperature $T$\n    U: sympy.Symbol, on-site interaction strength $U$\n\n    Outputs\n    ----------\n    I: sympy.Expr, the energy phase space integral, $I(T)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    I = ... # a SymPy expression of inputs\n    # ---------------------------------------------------------------\n\n    return I\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\nT, U = sp.symbols('T U')\n\ndef answer(T):\n    \"\"\"\n    Return the temperature dependence of the energy phase space integral in SymPy format.\n\n    Inputs\n    ----------\n    T: sympy.Symbol, temperature $T$\n    U: sympy.Symbol, on-site interaction strength $U$\n\n    Outputs\n    ----------\n    I: sympy.Expr, the energy phase space integral, $I(T)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    I = T\n    # ---------------------------------------------------------------\n\n    return I"
+    }
+  ]
+}

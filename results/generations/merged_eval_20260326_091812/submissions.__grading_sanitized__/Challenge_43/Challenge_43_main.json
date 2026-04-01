@@ -1,0 +1,50 @@
+{
+  "problem_id": "Challenge_43_main",
+  "generated_code": "def answer():\n    r\"\"\"\n    Return the values of the fractional charges trapped to the disclination core.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    charge_nontrivial_a: float, fractional charge for the nontrivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_trivial_a: float, fractional charge for the trivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_nontrivial_b: float, fractional charge for the nontrivial translation-equivalence class with one additional occupied bands.\n    charge_trivial_b: float, fractional charge for the trivial translation-equivalence class with one additional occupied bands.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    charge_nontrivial_a = 0.0\n    charge_trivial_a = -0.5\n    charge_nontrivial_b = 0.25\n    charge_trivial_b = 0.25\n    # ---------------------------------------------------------------\n\n    return charge_nontrivial_a, charge_trivial_a, charge_nontrivial_b, charge_trivial_b",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T13:50:10.749901",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_43_main",
+    "task_topic_tags": [
+      "many_body_spin_chain"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_many_body_spin_chain",
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_seed_many_body_spin_chain"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_43_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: many_body_spin_chain\n- gene: gene_topic_many_body_spin_chain (source=run_experience)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_seed_many_body_spin_chain (source=builtin_topic_prior)\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider a 4-fold rotationally symmetric 2D insulator on a square lattice with ten occupied Wannierizable bands. Two of them correspond to a pair of Wannier orbitals centered at the 2c position (i.e., edge center) in each unit cell. Four of them correspond to Wannier orbitals centered at the 1b position (i.e., plaquette center). And the others correspond to Wannier orbitals centered at the 1a position (i.e., lattice site).\n\n\n\n# Main problem:\nConsider a disclination with Frank angle $–\\pi/2$ (i.e., a 90° wedge removed).\nIf the translation-equivalence class is nontrivial, what fractional charge (in units of the electron charge e) is trapped to the disclination core?\nWhat if the translation-equivalence class is trivial?\n\nIf we consider one additional occupied band with Wannier orbitals at 1b position with angular momentum $l=+1/2$, what are the quantities above?\n\nExpress each anwser as a value in $[-1/2,1/2)$.\n\nCode template:\ndef answer():\n    r\"\"\"\n    Return the values of the fractional charges trapped to the disclination core.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    charge_nontrivial_a: float, fractional charge for the nontrivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_trivial_a: float, fractional charge for the trivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_nontrivial_b: float, fractional charge for the nontrivial translation-equivalence class with one additional occupied bands.\n    charge_trivial_b: float, fractional charge for the trivial translation-equivalence class with one additional occupied bands.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    charge_nontrivial_a = ...\n    charge_trivial_a = ...\n    charge_nontrivial_b = ...\n    charge_trivial_b = ...\n    # ---------------------------------------------------------------\n\n    return charge_nontrivial_a, charge_trivial_a, charge_nontrivial_b, charge_trivial_b\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "def answer():\n    r\"\"\"\n    Return the values of the fractional charges trapped to the disclination core.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    charge_nontrivial_a: float, fractional charge for the nontrivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_trivial_a: float, fractional charge for the trivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_nontrivial_b: float, fractional charge for the nontrivial translation-equivalence class with one additional occupied bands.\n    charge_trivial_b: float, fractional charge for the trivial translation-equivalence class with one additional occupied bands.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    charge_nontrivial_a = 0.0\n    charge_trivial_a = -0.5\n    charge_nontrivial_b = 0.25\n    charge_trivial_b = 0.25\n    # ---------------------------------------------------------------\n\n    return charge_nontrivial_a, charge_trivial_a, charge_nontrivial_b, charge_trivial_b"
+    }
+  ]
+}

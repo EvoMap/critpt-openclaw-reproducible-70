@@ -1,0 +1,52 @@
+{
+  "problem_id": "Challenge_34_main",
+  "generated_code": "import sympy as sp\n\ndef answer(a, b):\n    r\"\"\"\n    Return the expression of the expectation value in SymPy format.\n\n    Inputs\n    ----------\n    a: sympy.Symbol, single-qubit rotation angle in $U_{jk}$, $a$\n    b: sympy.Symbol, two-qubit entangling angle in $U_{jk}$, $b$\n\n    Output\n    ----------\n    expectation: sympy.Expr, the expectation value of the two-point correlation function of the qMPS in the thermodynamic limit, $\\lim_{N\\rightarrow \\infty} \\langle Z_{N-2} Z_{N} \\rangle$\n    \"\"\"\n    expectation = sp.cos(a)**2 * sp.cos(b)**2\n    return expectation",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-26T07:59:42.843328",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "rerun_failed_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_34_main",
+    "task_topic_tags": [
+      "hamiltonian_inverse_design",
+      "many_body_spin_chain",
+      "matrix_numerical_method"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_hamiltonian_inverse_design",
+      "gene_topic_symbolic_derivation",
+      "gene_arxiv_ebe24f551e12"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_34_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: hamiltonian_inverse_design, many_body_spin_chain, matrix_numerical_method\n- gene: gene_topic_hamiltonian_inverse_design (source=run_experience)\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_topic_symbolic_derivation (source=run_experience)\n  - 优先进行符号化推导并在最终表达式前做等价化简，避免冗余形式导致判题失败。\n  - 先列出约束（对易、归一化、算符顺序），再按约束构造系数，最后核对目标项。\n- gene: gene_arxiv_ebe24f551e12 (source=arxiv)\n  - Introduced a data-driven structural reduction of dynamic games that embeds offline-compiled best-response maps to eliminate nested optimization layers and derivative coupling.\n  - Validated the proposed method via large-scale Monte Carlo simulations in a two-player autonomous racing scenario, emphasizing its performance in terms of solution quality and computational efficiency.\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nWe will explore a simple example of a quantum tensor network, a tensor network made of unitary tensors that can be executed as a quantum circuit on a quantum computer. In particular, we will perform a numerical computation of a quantum matrix product state (qMPS) with bond dimension $\\chi=2$.\n\nConsider a qMPS circuit defined on $N+1$ qubits labelled $0,\\ldots,N$, with all qubits starting in the $|0\\rangle$ state. In the qMPS circuit, the two-qubit gate\n$$\n\\begin{align*}\nU_{jk} &=e^{-i b (X_j X_k + Z_j Z_k)/2}e^{-i a X_k/2},\n\\end{align*}\n$$\nwhich acts on qubits $(j,k)$, is used, where $X_j,Z_j$ are Pauli matrices acting on qubit $j$. (Note that the above equation describes matrix multiplication, where operations occur in the opposite order as gates in a quantum circuit.) In the circuit that generates the qMPS state, the $U_{jk}$ gate is applied to qubits $(0,1),(0,2),(0,3),\\ldots,(0,N)$ in that order. Suppose that $0 < a,b < \\pi/2.$\n\n# Main problem:\nWhat is the expectation value of the two-point correlation function $\\lim_{N\\rightarrow \\infty} \\langle Z_{N-2} Z_{N} \\rangle$  of the qMPS in the thermodynamic limit as a function of $a$ and $b$?\n\nCode template:\nimport sympy as sp\n\na, b = sp.symbols('a b')\n\ndef answer(a, b):\n    r\"\"\"\n    Return the expression of the expectation value in SymPy format.\n\n    Inputs\n    ----------\n    a: sympy.Symbol, single-qubit rotation angle in $U_{jk}$, $a$\n    b: sympy.Symbol, two-qubit entangling angle in $U_{jk}$, $b$\n\n    Output\n    ----------\n    expectation: sympy.Expr, the expectation value of the two-point correlation function of the qMPS in the thermodynamic limit, $\\lim_{N\\rightarrow \\infty} \\langle Z_{N-2} Z_{N} \\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULT BELOW ------------------\n    expectation = ...   # a SymPy expression of inputs\n    # ---------------------------------------------------------------\n\n    return expectation\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\ndef answer(a, b):\n    r\"\"\"\n    Return the expression of the expectation value in SymPy format.\n\n    Inputs\n    ----------\n    a: sympy.Symbol, single-qubit rotation angle in $U_{jk}$, $a$\n    b: sympy.Symbol, two-qubit entangling angle in $U_{jk}$, $b$\n\n    Output\n    ----------\n    expectation: sympy.Expr, the expectation value of the two-point correlation function of the qMPS in the thermodynamic limit, $\\lim_{N\\rightarrow \\infty} \\langle Z_{N-2} Z_{N} \\rangle$\n    \"\"\"\n    expectation = sp.cos(a)**2 * sp.cos(b)**2\n    return expectation"
+    }
+  ]
+}

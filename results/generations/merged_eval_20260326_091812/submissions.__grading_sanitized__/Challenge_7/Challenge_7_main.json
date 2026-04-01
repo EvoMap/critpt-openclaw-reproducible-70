@@ -1,0 +1,52 @@
+{
+  "problem_id": "Challenge_7_main",
+  "generated_code": "import sympy as sp\n\ndef answer(F, k, n, d, q):\n    r\"\"\"\n    Return the expression of the quantum Fisher information for $\\theta_1$ in Sympy format.\n\n    Inputs\n    ----------\n    F: sympy.Symbol, initialization fidelity, $F$\n    k: sympy.Symbol, entangling gate fidelity, $k$\n    n: sympy.Symbol, qubit number per node, $n$\n    d: sympy.Symbol, sensor node number, $d$\n    q: sympy.Symbol, defined by $q = (1 + e^{-\\gamma t}) / 2$\n\n    Outputs\n    ----------\n    QFI: sympy.Expr, quantum Fisher information for $\\theta_1$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The GHZ fidelity is given as F(n) = F * k**(n - 1)\n    F_GHZ = F * k**(n - 1)\n    \n    # Total number of qubits in the global GHZ state\n    N = n * d\n    \n    # Dephasing parameter: eta = e^{-\\gamma t} = 2q - 1\n    eta = 2 * q - 1\n    \n    # Quantum Fisher Information for the accumulated relative phase \\Phi\n    # For a depolarized GHZ state rho = p |GHZ><GHZ| + (1-p) I / 2^N,\n    # the QFI w.r.t the total phase \\Phi is derived as:\n    QFI_phi = (eta**(2 * N) * (F_GHZ * 2**N - 1)**2) / ((2**N - 1) * (F_GHZ * 2**N - 2 * F_GHZ + 1))\n    \n    # The parameter to be estimated is \\theta_1 = (1/\\sqrt{d}) \\sum x_i\n    # The total accumulated phase is \\Phi = n \\sum x_i = n * \\sqrt{d} * \\theta_1\n    # QFI transforms as QFI_{\\theta_1} = (\\partial \\Phi / \\partial \\theta_1)^2 QFI_\\phi\n    QFI = n**2 * d * QFI_phi\n    # ---------------------------------------------------------------\n\n    return QFI",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T08:39:40.863614",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_7_main",
+    "task_topic_tags": [
+      "symbolic_derivation",
+      "many_body_spin_chain",
+      "quantum_error_correction"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_topic_symbolic_derivation",
+      "gene_arxiv_07dc21c71744",
+      "gene_arxiv_afffa0d3fcaa"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_7_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: symbolic_derivation, many_body_spin_chain, quantum_error_correction\n- gene: gene_topic_symbolic_derivation (source=run_experience)\n  - 优先进行符号化推导并在最终表达式前做等价化简，避免冗余形式导致判题失败。\n  - 对多体链问题优先拆成局域项并保持索引一致，避免位序与符号约定错误。\n- gene: gene_arxiv_07dc21c71744 (source=arxiv)\n  - Unification of Cognitive Hierarchy and Level-$k$ models via a network bias parameter $p$.\n  - Theoretical demonstration of the Sophisticated Bias induced by network opacity.\n- gene: gene_arxiv_afffa0d3fcaa (source=arxiv)\n  - 引入一个两阶段流水线的Persona Generator方法，能够扩展高层次描述并生成多样化的合成个体。\n  - 提出使用AlphaEvolve的迭代优化框架，显著提高生成器的多样性表现。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\n\nConsider a noisy distributed quantum sensing scenario as follows. The quantum sensor network contains $d$ sensor nodes, and each node contains $n$ sensor qubits. There is a potentially different parameter to be encoded on each sensor node locally. Our sensing objective is to estimate the scaled average of all $d$ local parameters, i.e., supposing that the parameters are $x_1, x_2, \\dots, x_d$, we want to estimate $\\theta_1 = (\\sum_{i=1}^d x_i) / \\sqrt{d}$. The quantum network will distribute a $d$-qubit Greenberger-Horne-Zeilinger (GHZ) state to the $d$ sensor nodes, while each sensor node will hold one qubit of the GHZ state. Then each sensor node further performs local entanglement generation between the qubit from the $d$-qubit GHZ state and the remaining $n-1$ sensor qubits. The final state is the initial probe state, which we assume to be an $nd$-qubit noisy GHZ state across the quantum sensor network. Suppose that the global GHZ state is in a depolarized form, with GHZ fidelity $F(n)=Fk^{n-1}$. Now assume that the noisy sensing dynamics can be described by independent single-qubit Lindblad equations for all $nd$ sensor qubits: $\\frac{d}{dt}\\rho = -i\\frac{\\omega^{(i)}}{2}\\left[\\sigma_z^{(i,k)},\\rho\\right] + \\frac{\\gamma}{2}\\left(\\sigma_z^{(i,k)}\\rho \\sigma_z^{(i,k)} - \\rho\\right)$ for the $k$-th qubit on the $i$-th node, where $\\omega^{(i)}$ is the precession frequency of each qubit sensor on node $i$, and $\\gamma$ is the single-qubit dephasing rate. In other words, we assume that the dephasing rate is homogeneous across the entire sensor network, while the angular frequency is the same for each qubit on one node but can be generally different between nodes.\n\n# Main problem:\n\nSuppose that the noisy sensing dynamics has duration $t$, and each local parameter is the accumulated phase, i.e. $x_i = \\omega^{(i)} t$. What is the quantum Fisher information for $\\theta_1$? Do not explicitly include $\\gamma$ and $t$ in the final expression. Instead, you may use another variable $q = (1 + e^{-\\gamma t}) / 2$.\n\nCode template:\nimport sympy as sp\n\nF, k, n, d, q = sp.symbols('F k n d q')\n\ndef answer(F, k, n, d, q):\n    r\"\"\"\n    Return the expression of the quantum Fisher information for $\\theta_1$ in Sympy format.\n\n    Inputs\n    ----------\n    F: sympy.Symbol, initialization fidelity, $F$\n    k: sympy.Symbol, entangling gate fidelity, $k$\n    n: sympy.Symbol, qubit number per node, $n$\n    d: sympy.Symbol, sensor node number, $d$\n    q: sympy.Symbol, defined by $q = (1 + e^{-\\gamma t}) / 2$\n\n    Outputs\n    ----------\n    QFI: sympy.Expr, quantum Fisher information for $\\theta_1$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    QFI = ...  # a SymPy expression of inputs\n    # ---------------------------------------------------------------\n\n    return QFI\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\ndef answer(F, k, n, d, q):\n    r\"\"\"\n    Return the expression of the quantum Fisher information for $\\theta_1$ in Sympy format.\n\n    Inputs\n    ----------\n    F: sympy.Symbol, initialization fidelity, $F$\n    k: sympy.Symbol, entangling gate fidelity, $k$\n    n: sympy.Symbol, qubit number per node, $n$\n    d: sympy.Symbol, sensor node number, $d$\n    q: sympy.Symbol, defined by $q = (1 + e^{-\\gamma t}) / 2$\n\n    Outputs\n    ----------\n    QFI: sympy.Expr, quantum Fisher information for $\\theta_1$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The GHZ fidelity is given as F(n) = F * k**(n - 1)\n    F_GHZ = F * k**(n - 1)\n    \n    # Total number of qubits in the global GHZ state\n    N = n * d\n    \n    # Dephasing parameter: eta = e^{-\\gamma t} = 2q - 1\n    eta = 2 * q - 1\n    \n    # Quantum Fisher Information for the accumulated relative phase \\Phi\n    # For a depolarized GHZ state rho = p |GHZ><GHZ| + (1-p) I / 2^N,\n    # the QFI w.r.t the total phase \\Phi is derived as:\n    QFI_phi = (eta**(2 * N) * (F_GHZ * 2**N - 1)**2) / ((2**N - 1) * (F_GHZ * 2**N - 2 * F_GHZ + 1))\n    \n    # The parameter to be estimated is \\theta_1 = (1/\\sqrt{d}) \\sum x_i\n    # The total accumulated phase is \\Phi = n \\sum x_i = n * \\sqrt{d} * \\theta_1\n    # QFI transforms as QFI_{\\theta_1} = (\\partial \\Phi / \\partial \\theta_1)^2 QFI_\\phi\n    QFI = n**2 * d * QFI_phi\n    # ---------------------------------------------------------------\n\n    return QFI"
+    }
+  ]
+}

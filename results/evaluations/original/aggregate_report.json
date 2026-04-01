@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-03-26T09:22:45.208040",
+  "total_files_found": 70,
+  "total_submissions_loaded": 70,
+  "failed_to_load": [],
+  "summary": {
+    "total_submissions": 70,
+    "accuracy": 0.2714285714285714,
+    "timeout_rate": 0,
+    "server_timeout_count": 0
+  },
+  "metrics": {
+    "accuracy": 0.2714285714285714,
+    "timeout_rate": 0,
+    "server_timeout_count": 0,
+    "judge_error_count": 0
+  }
+}

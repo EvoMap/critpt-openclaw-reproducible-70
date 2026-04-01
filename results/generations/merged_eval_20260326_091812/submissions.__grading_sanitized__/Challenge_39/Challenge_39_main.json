@@ -1,0 +1,51 @@
+{
+  "problem_id": "Challenge_39_main",
+  "generated_code": "import sympy as sp\n\nn, np = sp.symbols('n n_prime', integer=True, nonnegative=True)\ng, gamma = sp.symbols('g gamma', positive=True)\nalpha = sp.symbols('alpha')\n\ndef answer(n, np, g, gamma, alpha):\n    r\"\"\"\n    Return the expression of the steady-state cavity coherence in SymPy format.\n\n    Inputs\n    ----------\n    n : sympy.Symbol\n        Photon number in state $|n\\rangle$.\n    np : sympy.Symbol\n        Photon number in state $|n'\\rangle$.\n    g : sympy.Symbol\n        Atom-cavity coupling constant $g$.\n    gamma : sympy.Symbol\n        Spontaneous-emission rate from $|e\\rangle$ to $|d\\rangle$, $\\gamma$.\n    alpha : sympy.Symbol\n        Complex amplitude of the initial coherent state $|\\alpha\\rangle$.\n\n    Outputs\n    ----------\n    coherence : sympy.Expr\n        Symbolic expression for the steady-state cavity coherence $\\langle n'| \\hat \\rho_{c,ss}|n\\rangle$.\n    \"\"\"\n\n    # The bright state |b, 0> never interacts with the cavity and never decays\n    term1 = sp.KroneckerDelta(np, 0) * sp.KroneckerDelta(n, 0)\n    \n    # Contribution from initial states |b, n'+1> and <b, n+1| decaying into the dark state |d>\n    num = 4 * gamma**2 * alpha**(np + 1) * sp.conjugate(alpha)**(n + 1)\n    den = (g**2 * (np - n)**2 + 2 * gamma**2 * (np + n + 2)) * sp.sqrt(sp.factorial(np) * sp.factorial(n))\n    term2 = num / den\n    \n    coherence = sp.exp(-sp.Abs(alpha)**2) * (term1 + term2)\n\n    return coherence",
+  "model": "openclaw/local-agent",
+  "timestamp": "2026-03-25T13:27:46.646070",
+  "generation_config": {
+    "runner": "openclaw_critpt_runner.py",
+    "run_id": "manual_gen_20260325_081355",
+    "include_sub_problems": false,
+    "retries": 2,
+    "concurrency": 2,
+    "agent_timeout_seconds": 900,
+    "process_timeout_seconds": 960,
+    "thinking_level": "off",
+    "prompt_profile": "full",
+    "allow_fallback_submission": false,
+    "save_attempt_traces": true,
+    "high_complexity_agent_timeout_seconds": 1200,
+    "high_complexity_process_timeout_seconds": 1320,
+    "enable_topic_knowledge_retrieval": true,
+    "knowledge_top_k": 3,
+    "enable_arxiv_learning": true,
+    "arxiv_max_papers": 1,
+    "repair_timeout_seconds": 180,
+    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
+    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
+    "task_problem_id": "Challenge_39_main",
+    "task_topic_tags": [
+      "symbolic_derivation",
+      "hamiltonian_inverse_design"
+    ],
+    "task_high_complexity": true,
+    "task_agent_timeout_seconds": 1200,
+    "task_process_timeout_seconds": 1320,
+    "task_selected_gene_ids": [
+      "gene_arxiv_07dc21c71744",
+      "gene_arxiv_5be1354332a5",
+      "gene_arxiv_632659d1d912"
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are solving a CritPt benchmark problem.\nReturn only final Python answer code with no markdown fences.\nIf a code template is provided, fill the template directly.\nUse relevant internal skills and strategies when they improve correctness.\nThink carefully, verify intermediate assumptions, and aim for the best possible final answer.\nYou may use available tools only when they improve correctness.\n\nProblem ID: Challenge_39_main\nProblem type: main\n\nKnowledge context:\nTask-specific knowledge guidance (retrieved from local gene/arXiv memory):\n- inferred_topics: symbolic_derivation, hamiltonian_inverse_design\n- gene: gene_arxiv_07dc21c71744 (source=arxiv)\n  - Unification of Cognitive Hierarchy and Level-$k$ models via a network bias parameter $p$.\n  - Theoretical demonstration of the Sophisticated Bias induced by network opacity.\n- gene: gene_arxiv_5be1354332a5 (source=arxiv)\n  - 提出了一种基于LLM的幸福教练的应用，拓展了AI在心理社会支持领域的研究。\n  - 通过长时间对话分析，揭示了人机交互动态，包括用户自主性、情感披露和谈判等重要模式。\n- gene: gene_arxiv_632659d1d912 (source=arxiv)\n  - 提出了EMA Anchor Policy，从Q-learning中借鉴的自适应锚点策略，显著提高了RL训练的稳定性。\n  - 开发了Top-k KL Estimator，能够在精确KL和采样KL之间灵活权衡，优化内存与计算效率。\nApply the above guidance only when it is consistent with the current problem constraints and template.\n\nProblem statement:\n# Problem setup:\nConsider a three-level atom with two ground states, $|b\\rangle$ and $|d\\rangle$, and a single excited state $|e\\rangle$. The atom is placed in a lossless cavity that is prepared in a coherent state, i.e., $\\hat \\rho_c(t=0) = |\\alpha\\rangle\\langle\\alpha|$. The cavity is resonant with the ''bright'' $|b\\rangle \\leftrightarrow |e\\rangle$ atomic transition. Setting $\\hbar \\equiv 1$, the Hamiltonian describing the atom-cavity interaction is then\n\\begin{equation}\n\\hat H = \\frac{g}{2} \\Big(|b\\rangle\\langle e| \\hat a^\\dagger +  |e\\rangle\\langle b| \\hat a\\Big).\n\\end{equation}\nThe atom undergoes spontaneous emission into free space (but not into the cavity) from $|e\\rangle$ to $|d\\rangle$. But once this happens, this atom no longer interacts with the cavity and hence becomes ''dark.'' The spontaneous emission is described by the dissipator\n\\begin{equation}\n    \\mathcal{D} \\hat \\rho =\n\t\t\\hat J \\hat \\rho \\hat J^\\dagger\n\t\t- \\frac{1}{2} \\left(\n\t\t\\hat J^\\dagger \\hat J \\hat \\rho + \\hat \\rho \\hat J^\\dagger \\hat J\n\t\t\\right),\n\\end{equation}\nwhere $\\hat J = \\sqrt{\\gamma} |d\\rangle\\langle e|$, so that the evolution of the atom-cavity system is governed by the quantum master equation\n\\begin{equation}\n    \\frac{d\\hat \\rho}{dt} = -i\\left[ \\hat H, \\hat \\rho \\right] + \\mathcal{D} \\hat \\rho.\n\\end{equation}\nAssume the atom is prepared in the bright state so that the initial atom-cavity state is $\\hat \\rho_0 = |b\\rangle\\langle b| \\otimes  |\\alpha\\rangle\\langle\\alpha|$.\n\n# Main problem:\n\nDerive an expression for the cavity field coherences,  $\\langle n'| \\hat \\rho_{c,ss}|n\\rangle$, in steady state.\n\nCode template:\nimport sympy as sp\n\nn, np = sp.symbols('n n_prime', integer=True, nonnegative=True)\ng, gamma = sp.symbols('g gamma', positive=True)\nalpha = sp.symbols('alpha')\n\ndef answer(n, np, g, gamma, alpha):\n    r\"\"\"\n    Return the expression of the steady-state cavity coherence in SymPy format.\n\n    Inputs\n    ----------\n    n : sympy.Symbol\n        Photon number in state $|n\\rangle$.\n    np : sympy.Symbol\n        Photon number in state $|n'\\rangle$.\n    g : sympy.Symbol\n        Atom-cavity coupling constant $g$.\n    gamma : sympy.Symbol\n        Spontaneous-emission rate from $|e\\rangle$ to $|d\\rangle$, $\\gamma$.\n    alpha : sympy.Symbol\n        Complex amplitude of the initial coherent state $|\\alpha\\rangle$.\n\n    Outputs\n    ----------\n    coherence : sympy.Expr\n        Symbolic expression for the steady-state cavity coherence $\\langle n'| \\hat \\rho_{c,ss}|n\\rangle$.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    coherence = ...  # a SymPy expression of the inputs\n    # ---------------------------------------------------------------\n\n    return coherence\n\nOutput requirement: return only Python code."
+    },
+    {
+      "role": "assistant",
+      "content": "import sympy as sp\n\nn, np = sp.symbols('n n_prime', integer=True, nonnegative=True)\ng, gamma = sp.symbols('g gamma', positive=True)\nalpha = sp.symbols('alpha')\n\ndef answer(n, np, g, gamma, alpha):\n    r\"\"\"\n    Return the expression of the steady-state cavity coherence in SymPy format.\n\n    Inputs\n    ----------\n    n : sympy.Symbol\n        Photon number in state $|n\\rangle$.\n    np : sympy.Symbol\n        Photon number in state $|n'\\rangle$.\n    g : sympy.Symbol\n        Atom-cavity coupling constant $g$.\n    gamma : sympy.Symbol\n        Spontaneous-emission rate from $|e\\rangle$ to $|d\\rangle$, $\\gamma$.\n    alpha : sympy.Symbol\n        Complex amplitude of the initial coherent state $|\\alpha\\rangle$.\n\n    Outputs\n    ----------\n    coherence : sympy.Expr\n        Symbolic expression for the steady-state cavity coherence $\\langle n'| \\hat \\rho_{c,ss}|n\\rangle$.\n    \"\"\"\n\n    # The bright state |b, 0> never interacts with the cavity and never decays\n    term1 = sp.KroneckerDelta(np, 0) * sp.KroneckerDelta(n, 0)\n    \n    # Contribution from initial states |b, n'+1> and <b, n+1| decaying into the dark state |d>\n    num = 4 * gamma**2 * alpha**(np + 1) * sp.conjugate(alpha)**(n + 1)\n    den = (g**2 * (np - n)**2 + 2 * gamma**2 * (np + n + 2)) * sp.sqrt(sp.factorial(np) * sp.factorial(n))\n    term2 = num / den\n    \n    coherence = sp.exp(-sp.Abs(alpha)**2) * (term1 + term2)\n\n    return coherence"
+    }
+  ]
+}
