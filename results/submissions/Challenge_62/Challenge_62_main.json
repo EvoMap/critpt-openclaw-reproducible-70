@@ -2,10 +2,7 @@
   "problem_id": "Challenge_62_main",
   "generated_code": "import sympy as sp\n\nphi = sp.symbols('phi')\nk = sp.symbols('k', integer=True)\n\ndef answer(phi, k, k_value):\n    r\"\"\"\n    Return the violation as a function of $\\phi$ for the case $k=1$, and the expressions of $T$ and $\\phi_{\\max}$ in Sympy format for any given k_value.\n\n    Inputs\n    ----------\n    phi: sympy.Symbol, phase angle $\\phi$\n    k: sympy.Symbol, $k$\n    k_value: int\n        A specific value of $k$ used to determine which interval expression to return, but is *not* substituted into the final result.\n\n    Outputs\n    ----------\n    violation: sympy.Expr, the violation $\\delta$ as a function of $\\phi$ for the case $k=1 (N=2k+1=3)$.\n    T: sympy.Interval, the interval $T \\subseteq [0,\\pi]$ of phases for which a quantum violation occurs.\n        Explicitly set the parameters `left_open` and `right_open`.\n    phi_max: sympy.Expr, the phase $\\phi_{\\max}$ at which the maximal quantum violation occurs.\n\n    The returned expressions of T and phi_max should preserve full symbolic dependence on k, while `k_value` is used internally solely to to select which interval expression to return.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    violation = (sp.sqrt(5 - 4*sp.cos(phi)) - 1) / 3\n    \n    if k_value == 1:\n        T = sp.Interval(0, sp.pi, left_open=True, right_open=False)\n        phi_max = sp.pi\n    else:\n        T = sp.Interval(0, sp.acos((k - 2) / (k - 1)), left_open=True, right_open=True)\n        num = 32*k**4 - 104*k**3 + 112*k**2 - 46*k + 5\n        den = 4 * (k - 1)**2 * (2*k - 1) * (4*k - 1)\n        phi_max = sp.acos(num / den)\n    # ---------------------------------------------------------------\n\n    return violation, T, phi_max",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-26T08:18:36.788775",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "rerun_failed_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_62_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

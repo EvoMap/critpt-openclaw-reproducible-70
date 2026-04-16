@@ -2,10 +2,7 @@
   "problem_id": "Challenge_8_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the value of the requested quantity at horizon crossing at 60 e-folds before inflation ends\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    value : float, the value of the requested quantity at horizon crossing at 60 e-folds before inflation ends\n    perturb_value_1: float, the value of $\\frac{\\delta\\phi}{\\delta\\dot{\\vartheta} - \\dot{\\vartheta}A}$\n    perturb_value_2: float, the value of $\\frac{2AH}{\\dot{\\vartheta}\\delta\\vartheta}$\n\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    value = 3.1675\n    perturb_value_1 = 0.85\n    perturb_value_2 = 5.335\n    # ---------------------------------------------------------------\n\n    return value, perturb_value_1, perturb_value_2",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T10:39:30.069084",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_8_main",
     "task_topic_tags": [
       "many_body_spin_chain"

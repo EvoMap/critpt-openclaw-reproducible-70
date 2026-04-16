@@ -2,10 +2,7 @@
   "problem_id": "Challenge_54_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the values of all magic wavelengths from 400 nm to 600 nm and associated transition types for Yb 171 and Yb 174.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Yb_171: set[tuple[int,str]]\n            A set of `(magic_wavelength, transition_type)` tuples for Yb 171.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    Yb_174: set[tuple[int,str]]\n            A set of `(magic wavelength, transition type)` tuples for Yb 174.\n            magic_wavelength is a rounded integer (nm) in [400, 600] and transition_type is either 'sigma' or 'pi'.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    Yb_171 = {(487, 'pi')}\n    Yb_174 = {(532, 'pi')}\n    # ---------------------------------------------------------------\n\n    return Yb_171, Yb_174",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-26T08:22:10.861322",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "rerun_failed_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_54_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

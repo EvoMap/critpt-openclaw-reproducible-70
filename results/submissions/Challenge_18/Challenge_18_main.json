@@ -2,10 +2,7 @@
   "problem_id": "Challenge_18_main",
   "generated_code": "import sympy as sp\n\nepsilon0 = sp.symbols('epsilon0', positive=True)   # vacuum permittivity\nk, z_R, d0 = sp.symbols('k z_R d0')\nalpha_1, alpha_2 = sp.symbols('alpha_1 alpha_2')\nE_1, E_2 = sp.symbols('E_1 E_2')\nphi_1, phi_2 = sp.symbols('phi_1 phi_2')\nm, Omega_1, Omega_2 = sp.symbols('m Omega_1 Omega_2')\n\ndef answer(epsilon0, k, z_R, d0, alpha_1, alpha_2, E_1, E_2, phi_1, phi_2, m, Omega_1, Omega_2):\n    r\"\"\"\n    Return the expression of $k_1$ and $k_2$ in Sympy format.\n\n    Inputs\n    ----------\n    epsilon0:sympy.Symbol, vacuum permittivity $\\varepsilon_0$\n    k:       sympy.Symbol, wave vector, $k$\n    z_R:     sympy.Symbol, Rayleigh range, $z_R$\n    d0:      sympy.Symbol, distance between the two spheres at equilibrium, $d_0$\n    alpha_1: sympy.Symbol, polarizability of nanoparticles 1, $\\alpha_1$\n    alpha_2: sympy.Symbol, polarizability of nanoparticles 2, $\\alpha_2$\n    E_1:     sympy.Symbol, electric-field amplitude of tweezer 1, $E_1$\n    E_2:     sympy.Symbol, electric-field amplitude of tweezer 2, $E_2$\n    phi_1:   sympy.Symbol, phase of tweezer 1 at the focal plane, $\\phi_1$\n    phi_2:   sympy.Symbol, phase of tweezer 2 at the focal plane, $\\phi_2$\n    m:       sympy.Symbol, nanoparticle mass, $m$\n    Omega_1: sympy.Symbol, frequency parameter of nanosphere 1, $\\Omega_1$\n    Omega_2: sympy.Symbol, frequency parameter of nanosphere 2, $\\Omega_2$\n\n    Outputs\n    ----------\n    k1: sympy.Expr, $k_1$ in the equations of motion\n    k2: sympy.Expr, $k_2$ in the equations of motion\n    \"\"\"\n\n    # Effective wave vector on-axis at focus, incorporating Gouy phase derivative\n    k_tilde = k - 1/z_R\n    \n    # Coefficient from far-field dipole-dipole interaction cross-term \n    C = (alpha_1 * alpha_2 * E_1 * E_2 * k**2 * k_tilde**2) / (8 * sp.pi * epsilon0 * d0)\n    \n    # Reciprocal and non-reciprocal coupling terms\n    k1 = C * sp.cos(k * d0) * sp.cos(phi_1 - phi_2)\n    k2 = C * sp.sin(k * d0) * sp.sin(phi_1 - phi_2)\n\n    return k1, k2",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:37:38.178913",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_18_main",
     "task_topic_tags": [
       "symbolic_derivation"

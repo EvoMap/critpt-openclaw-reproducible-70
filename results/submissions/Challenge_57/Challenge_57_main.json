@@ -2,10 +2,7 @@
   "problem_id": "Challenge_57_main",
   "generated_code": "def answer():\n    import math\n\n    # Given parameters\n    sqrt_S_h = 3e-24  # Strain sensitivity in Hz^{-1/2}\n    f = 250.0  # Frequency in Hz\n    omega = 2 * math.pi * f\n    T_years = 13.0\n    T_seconds = T_years * 365.25 * 24 * 3600  # Observation time in seconds\n    L = 4000.0  # LIGO arm length in meters\n\n    # Physical constants\n    rho_DM_GeV = 0.3  # Standard local dark matter density in GeV/cm^3\n    e_SI = 1.602176634e-19  # Elementary charge in C\n    m_n = 1.674927498e-27  # Neutron mass in kg\n    eps_0 = 8.8541878128e-12  # Vacuum permittivity in F/m\n\n    # Convert dark matter density to SI units (J/m^3)\n    rho_DM_SI = rho_DM_GeV * 1e9 * e_SI * 1e6\n\n    # Dark electric field amplitude from energy density (rho = 1/2 * eps_0 * E_D^2)\n    E_D = math.sqrt(2 * rho_DM_SI / eps_0)\n\n    # Required strain amplitude for SNR = 1\n    # SNR = h0 * sqrt(T) / sqrt_S_h => h0 = sqrt_S_h / sqrt(T)\n    h0 = sqrt_S_h / math.sqrt(T_seconds)\n\n    # The differential acceleration amplitude is:\n    # \\Delta a = \\epsilon_{B-L} * e * \\Delta(Q/M) * E_D\n    # where \\Delta(Q/M) = \\delta q / m_n\n    # The effective strain is h0 = \\Delta a / (omega^2 * L) (assuming optimal alignment)\n    # \\epsilon_{B-L} = h0 * m_n * omega^2 * L / (e * E_D * \\delta q)\n    \n    def get_eps(dq):\n        return (h0 * m_n * omega**2 * L) / (e_SI * E_D * dq)\n\n    # Calculate for the given scenarios of \\delta q\n    dqs = [0.074, 6e-3, 5e-4]\n    eps_B_L_min = [get_eps(dq) for dq in dqs]\n\n    return eps_B_L_min",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T15:58:44.021938",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_57_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

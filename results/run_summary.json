@@ -1,14 +1,4 @@
 {
-  "run_id": "merged_eval_20260326_091812",
-  "type": "merged_for_evaluation",
-  "base_generation_run_id": "manual_gen_20260325_081355",
-  "rerun_generation_run_id": "rerun_failed_20260325_081355",
-  "replaced_challenges": [
-    34,
-    47,
-    54,
-    62
-  ],
   "submission_count": 70,
   "submission_files": [
     "Challenge_1/Challenge_1_main.json",

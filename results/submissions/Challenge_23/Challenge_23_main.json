@@ -2,10 +2,7 @@
   "problem_id": "Challenge_23_main",
   "generated_code": "import sympy as sp\n\nx, p_z, epsilon_UV, epsilon_IR, mu = sp.symbols('x p_z epsilon_UV epsilon_IR mu')\n\ndef answer(x, p_z, epsilon_UV, epsilon_IR, mu):\n    r\"\"\"\n    Return the expressions of $\\tilde q_{\\rm sail}(x,p^z,\\epsilon,\\mu)$ in Sympy format.\n\n    Inputs\n    ----------\n    x: sympy.Symbol, longitudinal momentum fraction $x$\n    p_z: sympy.Symbol, longitudinal momentum $p^z$\n    epsilon_UV: sympy.Symbol, dimensional–regularization parameter for UV divergences, $\\epsilon_{\\rm UV}$\n    epsilon_IR: sympy.Symbol, dimensional–regularization parameter for IR divergences, $\\epsilon_{\\rm IR}$\n    mu: sympy.Symbol, renormalization scale $\\mu$\n\n    Outputs\n    ----------\n    expr_lt0:  sympy.Expr,  $\\tilde q_{\\rm sail}(x,p^z,\\epsilon,\\mu)$ for $x < 0$, to $O(\\epsilon_{\\rm UV}^0)$\n    expr_mid:  sympy.Expr,  $\\tilde q_{\\rm sail}(x,p^z,\\epsilon,\\mu)$ for $0<x<1$, to $O(\\epsilon_{\\rm UV}^0)$\n    expr_gt1:  sympy.Expr,  $\\tilde q_{\\rm sail}(x,p^z,\\epsilon,\\mu)$ for $x > 1$, to $O(\\epsilon_{\\rm UV}^0)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    prefactor = -sp.I / (8 * sp.pi * (1 - x) * p_z)\n    \n    expr_lt0 = prefactor * (2 * x * sp.log((x - 1) / x) + 1)\n    expr_mid = prefactor * (-2 * x / epsilon_IR - 2 * x * sp.log(mu**2 / (4 * x * (1 - x) * p_z**2)) + 1 - 2 * x)\n    expr_gt1 = prefactor * (2 * x * sp.log(x / (x - 1)) - 1)\n    # ---------------------------------------------------------------\n\n    return expr_lt0, expr_mid, expr_gt1",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:51:18.156499",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_23_main",
     "task_topic_tags": [
       "symbolic_derivation",

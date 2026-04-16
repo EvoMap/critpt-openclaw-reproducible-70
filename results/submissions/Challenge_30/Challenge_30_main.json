@@ -2,10 +2,7 @@
   "problem_id": "Challenge_30_main",
   "generated_code": "import sympy as sp\nfrom sympy.physics.quantum import Ket, Bra, Dagger\n\nphi = Ket('phi')\npsi = Ket('psi')\nphi_star = Ket('phi*')\npsi_star = Ket('psi*')\nd_P, d_B = sp.symbols('d_P d_B')\nd = sp.symbols('d')\n\ndef answer(phi, psi, phi_star, psi_star, d_P, d_B, d):\n    r\"\"\"\n    Return the expression of \\overline{\\lvert \\langle\\phi|V^\\dagger V|\\psi\\rangle \\rvert^2} in Sympy format.\n\n    Inputs\n    ----------\n    phi: sympy.Symbol, state vector |\\phi\\rangle_b\n    psi: sympy.Symbol, state vector |\\psi\\rangle_b\n    phi_star: sympy.Symbol, state vector |\\phi^*\\rangle_b\n    psi_star: sympy.Symbol, state vector |\\psi^*\\rangle_b\n    d_P: sympy.Symbol, $d_P := \\dim H_P$\n    d_B: sympy.Symbol, $d_B := \\dim H_B$\n    d: sympy.Symbol, $d = \\dim(H_b \\otimes H_f)$\n\n    Outputs\n    ----------\n    expr: sympy.Expr, \\overline{\\lvert \\langle\\phi|V^\\dagger V|\\psi\\rangle \\rvert^2},\n        where the overline indicates the average over $O$.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    alpha = (d_B**2 * (d + 1) - 2 * d_B) / (d * (d - 1) * (d + 2))\n    beta = d_B * (d - d_B) / (d * (d - 1) * (d + 2))\n    \n    term1 = alpha * Dagger(phi) * psi * Dagger(psi) * phi\n    term2 = beta * Dagger(phi) * phi * Dagger(psi) * psi\n    term3 = beta * Dagger(phi_star) * psi * Dagger(psi) * phi_star\n    \n    expr = d_P**2 * (term1 + term2 + term3)\n    # ---------------------------------------------------------------\n\n    return expr",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T12:14:45.436679",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_30_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

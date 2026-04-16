@@ -2,10 +2,7 @@
   "problem_id": "Challenge_2_main",
   "generated_code": "import sympy as sp\n\ndef answer(lambda_plus, lambda_minus, k_plus, k_minus, alpha, vbar_b, beta, sigma2):\n    # For a continuous-time fluctuating single-cell growth rate process that is independent\n    # of the cell division mechanism, the total volume of the population grows exactly as \n    # the expected volume of a single lineage. Because the average cell size in the population \n    # remains bounded asymptotically (due to size control), the asymptotic population growth rate \n    # Lambda of the cell number N(t) is identically equal to the asymptotic growth rate of the \n    # total population volume. \n    # \n    # The growth rate of the expected volume Lambda_V is determined by the dominant pole \n    # of the renewal equation for the two-state continuous-time process, satisfying:\n    # (k_plus + Lambda - lambda_plus) * (k_minus + Lambda - lambda_minus) = k_plus * k_minus\n    # which is remarkably independent of the cell size control parameter beta, the division \n    # noise variance sigma^2, and even the shape parameter alpha of the gamma-distributed \n    # waiting times (since the dominant root corresponds to the base of the Laplace transform \n    # equating to 1).\n    # \n    # Thus, Lambda is exactly the positive root of the quadratic equation:\n    # Lambda^2 + (k_plus + k_minus - lambda_plus - lambda_minus)*Lambda \n    # + (lambda_plus - k_plus)*(lambda_minus - k_minus) - k_plus*k_minus = 0\n    #\n    # The first-order correction in sigma^2/vbar_b^2 is 0.\n    \n    # Quadratic coefficients for A * Lambda^2 + B * Lambda + C = 0\n    A = 1\n    B = k_plus + k_minus - lambda_plus - lambda_minus\n    C = (lambda_plus - k_plus) * (lambda_minus - k_minus) - k_plus * k_minus\n    \n    # Solving the quadratic equation for the dominant (larger) root\n    Lambda = (-B + sp.sqrt(B**2 - 4*A*C)) / (2*A)\n    \n    # Since the asymptotic population growth rate is independent of beta and sigma^2\n    answer_beta = 'C'\n    answer_sigma2 = 'C'\n    \n    return Lambda, answer_beta, answer_sigma2",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T08:34:39.891819",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_2_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

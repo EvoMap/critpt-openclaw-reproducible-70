@@ -2,10 +2,7 @@
   "problem_id": "Challenge_9_main",
   "generated_code": "def answer():\n    import numpy as np\n    from scipy.integrate import solve_ivp\n\n    n_val = 80\n    f_val = 0.18\n    M_Pl = 1.0\n    Lambda = 1e-3\n    Lambda4 = Lambda**4\n    \n    # K is the modified kinetic factor due to the Nieh-Yan term after integrating out torsion\n    K = 1.0 + 6.0 * (n_val * f_val / M_Pl)**2\n\n    def V(theta):\n        return Lambda4 * (1.0 - np.cos(theta / f_val))\n\n    def dV(theta):\n        return (Lambda4 / f_val) * np.sin(theta / f_val)\n\n    def derivs(t, y):\n        theta, theta_dot, N = y\n        # Friedmann equation for the Hubble parameter\n        H = np.sqrt(abs(0.5 * K * theta_dot**2 + V(theta)) / (3.0 * M_Pl**2))\n        # Klein-Gordon equation for the scalar field\n        theta_ddot = -3.0 * H * theta_dot - dV(theta) / K\n        return [theta_dot, theta_ddot, H]\n\n    y0 = [7.23, 0.0, 0.0]\n    t_span = (0.0, 2000000.0)\n\n    sol = solve_ivp(derivs, t_span, y0, method='DOP853', rtol=1e-12, atol=1e-12)\n\n    e_folds = sol.y[2][-1]\n\n    return float(e_folds)",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T10:49:47.426988",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_9_main",
     "task_topic_tags": [
       "many_body_spin_chain"

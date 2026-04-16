@@ -2,10 +2,7 @@
   "problem_id": "Challenge_66_main",
   "generated_code": "import sympy as sp\n\nq = sp.symbols('q')\n\ndef answer(q):\n    r\"\"\"\n    Return the expression of the generating function in SymPy format.\n\n    Inputs\n    ----------\n    q: sympy.Symbol, Fugacity for the U(1) R-charge, $q$\n\n    Outputs\n    ----------\n    generating_func: sympy.Expr, the generating function of the index of trace relations to up charge 15 in a free $U(2)$ gauge theory\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    generating_func = 5*q**15 - 2*q**14 - 3*q**13 + 3*q**12 - q**10 + 2*q**9 - q**7\n    # ---------------------------------------------------------------\n\n    return generating_func",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T17:14:40.922144",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_66_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

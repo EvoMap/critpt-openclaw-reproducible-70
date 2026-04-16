@@ -2,10 +2,7 @@
   "problem_id": "Challenge_56_main",
   "generated_code": "import math\n\ndef answer():\n    hbar = 6.582119569e-16\n    c = 299792458\n    v = 230000\n    rho_local = 0.4e9\n    rho = 178 * rho_local * 1e6\n    hc = hbar * c\n    rho_eV4 = rho * hc**3\n    f = 200\n    m_phi = 2 * math.pi * hbar * f\n    phi_0 = math.sqrt(2 * rho_eV4) / m_phi\n    \n    L = 40000\n    l = 0.06\n    n = 3.5\n    K = L / (n * l * phi_0)\n    K_GeV = K * 1e9\n    \n    Sh = (2e-25)**2\n    T1 = 1000\n    h1 = math.sqrt(Sh / T1)\n    lambda_inv_1 = h1 * K_GeV\n    \n    T2 = 0.7 * 365.25 * 24 * 3600\n    df = f * (v**2) / (c**2) / 2\n    tau = 1 / df\n    h2 = math.sqrt(Sh) / (T2 * tau)**0.25\n    lambda_inv_2 = h2 * K_GeV\n    \n    return [lambda_inv_1, lambda_inv_2]",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T15:52:15.541474",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_56_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

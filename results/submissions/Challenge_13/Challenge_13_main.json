@@ -2,10 +2,7 @@
   "problem_id": "Challenge_13_main",
   "generated_code": "import sympy as sp\n\ndef answer():\n    r\"\"\"\n    Return the expectation values of Verlinde lines and corresponding labels.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    values: set[tuple[float, int, float, int, complex]], a set of tuples $(j_L,n_L,j_R,n_R,\\lambda_{(j_L,n_L,j_R,n_R)})$\n        where $\\lambda_{(j_L,n_L,j_R,n_R)}$ is the expectation value of the Verlinde line operator.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    values = set()\n    for j_L in [0.0, 0.5, 1.0]:\n        for n_L in [0, 1, 2, 3]:\n            for j_R in [0.0, 0.5, 1.0]:\n                for n_R in [0, 1, 2, 3]:\n                    valid_L = (n_L % 2) == int(2 * j_L) % 2\n                    valid_R = (n_R % 2) == int(2 * j_R) % 2\n                    \n                    if valid_L and valid_R:\n                        d_L = 2**0.5 if j_L == 0.5 else 1.0\n                        d_R = 2**0.5 if j_R == 0.5 else 1.0\n                        lam = complex(d_L * d_R)\n                    else:\n                        lam = complex(0.0)\n                        \n                    values.add((float(j_L), int(n_L), float(j_R), int(n_R), lam))\n    # ---------------------------------------------------------------\n\n    return values",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:09:11.767296",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_13_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

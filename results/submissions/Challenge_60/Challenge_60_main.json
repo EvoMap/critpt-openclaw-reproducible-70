@@ -2,10 +2,7 @@
   "problem_id": "Challenge_60_main",
   "generated_code": "import sympy as sp\n\nDelta_k_sq, gamma = sp.symbols('Delta_k_sq gamma')\n\ndef answer(Delta_k_sq, gamma):\n    r\"\"\"\n    Return the expression of the quantum Fisher information in Sympy format.\n\n    Inputs\n    ----------\n    Delta_k_sq: sympy.Symbol, $\\Delta k^2 \\equiv \\int_{-\\infty}^{\\infty} d x\\left[\\frac{\\partial \\psi(x)}{\\partial x}\\right]^2$\n    gamma: sympy.Symbol, $\\gamma \\equiv \\int_{-\\infty}^{\\infty} d x \\frac{\\partial \\psi(x)}{\\partial x} \\psi\\left(x-u_2+u_1 \\right)$\n\n    Outputs\n    ----------\n    QFI: sympy.Expr, quantum Fisher information of estimating $\\theta=\\frac{1}{3}u_1+\\frac{2}{3}u_2$ per each measured photon,\n         $u_1$ and $u_2$ are the positions of the two point sources\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    QFI = 36 * Delta_k_sq * (Delta_k_sq - gamma**2) / (10 * Delta_k_sq - gamma**2)\n    # ---------------------------------------------------------------\n\n    return QFI",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T16:18:08.274033",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_60_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

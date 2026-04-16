@@ -2,10 +2,7 @@
   "problem_id": "Challenge_49_main",
   "generated_code": "import sympy as sp\n\nz, K = sp.symbols('z K')\n\ndef answer(z, K):\n    r\"\"\"\n    Return the expression of $\\varphi$ in Sympy format.\n\n    Inputs\n    ----------\n    z: sympy.Symbol, defined as $\\log_2 t$\n    K: sympy.Symbol, constant from the self-consistent equation\n            $$\\frac{1}{\\ell^{\\mu}(t)} \\int_0^t \\ell(\\tau) \\ell(t - \\tau) d\\tau = K$$\n\n    Outputs\n    ----------\n    varphi: sympy.Expr, expansion of $\\varphi$ in terms of $z$ for large $t$\n        and retain terms up to constant order in $z$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    C1 = sp.log(sp.pi, 2) / 4 - sp.log(K, 2) / 2\n    C2 = 2 * C1 + 1 - 1 / sp.log(2)\n    \n    term1 = z**2 / 4\n    term2 = -z * sp.log(z, 2) / 4\n    term3 = z * (C1 + 1 / (4 * sp.log(2)))\n    term4 = sp.log(z, 2)**2 / 16\n    term5 = -sp.log(z, 2) * C2 / 4\n    \n    varphi = term1 + term2 + term3 + term4 + term5\n    varphi = sp.expand(varphi)\n    # ---------------------------------------------------------------\n\n    return varphi",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T14:33:06.808503",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_49_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

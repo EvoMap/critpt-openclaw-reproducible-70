@@ -2,10 +2,7 @@
   "problem_id": "Challenge_36_main",
   "generated_code": "import sympy as sp\n\nk, n = sp.symbols('k n')\nX_tot = sp.symbols('X_tot')\n\ndef answer(k, n, X_tot):\n    r\"\"\"\n    Return the expression of $\\mathbb E\\left[C^2\\right]$ in Sympy format,\n    and the minimal value of $n$ need to be to observe such oscillatory behavior.\n\n    Inputs\n    ----------\n    k: sympy.Symbol, reaction rate constant $k$\n    n: sympy.Symbol, number of components in the cycle $n$\n    X_tot: sympy.Symbol, total population size $X_{tot}$\n\n    Outputs\n    ----------\n    E_C2: sympy.Expr, expression of $\\mathbb E\\left[C^2\\right]$ in terms of model parameters $k$ and $n$\n    n_min: sympy.Expr, minimal value of $n$ to observe such oscillatory behavior\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    E_C2  = 2 * sp.cos(2 * sp.pi / n) / (2 * sp.cos(2 * sp.pi / n) - 1)\n    n_min = sp.Integer(7)\n    # ---------------------------------------------------------------\n\n    return E_C2, n_min",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T12:31:17.188836",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_36_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

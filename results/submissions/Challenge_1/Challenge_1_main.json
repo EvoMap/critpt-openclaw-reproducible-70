@@ -2,10 +2,7 @@
   "problem_id": "Challenge_1_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return coefficients of the terms.\n\n    Input\n    ----------\n    None\n\n    Output\n    ----------\n    coeffs: list[float], the coefficients of terms in $X^{(4)}$, in the order given in the problem\n    \"\"\"\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    coeffs = [23/192, 0.0, -1/6, 0.0, 1/24, 1/384, 0.0, 0.0, 0.0, 0.0, 1/192]\n    # ---------------------------------------------------------------\n\n    return coeffs",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T08:23:36.796547",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_1_main",
     "task_topic_tags": [
       "symbolic_derivation",

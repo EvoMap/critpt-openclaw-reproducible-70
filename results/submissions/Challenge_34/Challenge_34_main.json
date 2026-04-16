@@ -2,10 +2,7 @@
   "problem_id": "Challenge_34_main",
   "generated_code": "import sympy as sp\n\ndef answer(a, b):\n    r\"\"\"\n    Return the expression of the expectation value in SymPy format.\n\n    Inputs\n    ----------\n    a: sympy.Symbol, single-qubit rotation angle in $U_{jk}$, $a$\n    b: sympy.Symbol, two-qubit entangling angle in $U_{jk}$, $b$\n\n    Output\n    ----------\n    expectation: sympy.Expr, the expectation value of the two-point correlation function of the qMPS in the thermodynamic limit, $\\lim_{N\\rightarrow \\infty} \\langle Z_{N-2} Z_{N} \\rangle$\n    \"\"\"\n    expectation = sp.cos(a)**2 * sp.cos(b)**2\n    return expectation",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-26T07:59:42.843328",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "rerun_failed_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_34_main",
     "task_topic_tags": [
       "hamiltonian_inverse_design",

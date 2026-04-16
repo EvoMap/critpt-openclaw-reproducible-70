@@ -2,10 +2,7 @@
   "problem_id": "Challenge_37_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return a tuple of answers (isolated, gap, TrG_over_2pi, Z2_topology, wannier_expressible).\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    result: a tuple whose entries are\n        isolated            – \"Yes\", \"No\", or \"N/A\"\n        gap                 – float (4 decimal places) or \"N/A\"\n        TrG_over_2pi        – float (4 decimal places) or \"N/A\"\n        Z2_topology         – \"Trivial\", \"Nontrivial\", or \"N/A\"\n        wannier_expressible – \"Yes\", \"No\", or \"N/A\"\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    result = (\"Yes\", 0.0000, 2.9977, \"Nontrivial\", \"Yes\")\n    # ---------------------------------------------------------------\n\n    return result",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T13:12:42.856616",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_37_main",
     "task_topic_tags": [
       "hamiltonian_inverse_design",

@@ -2,10 +2,7 @@
   "problem_id": "Challenge_46_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the energies of the scar states and the corresponding base-10 logarithms\n    of their squared overlaps with the $Z_2$ state.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    energies: list[float]\n        Energies of the scar states in ascending order (four-decimal precision).\n    log_overlaps: list[float]\n        $\\log_{10}|\\langle Z_2|\\psi\\rangle|^2$ for each scar state in the same order as `energies` (four-decimal precision).\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    energies = [\n        -15.6926, -13.7196, -11.5379, -9.1466, -6.6162, -4.0007, -1.3386,\n        1.3386, 4.0007, 6.6162, 9.1466, 11.5379, 13.7196, 15.6926\n    ]\n    log_overlaps = [\n        -6.8309, -4.7130, -3.3934, -2.4254, -1.7385, -1.3046, -1.0903,\n        -1.0903, -1.3046, -1.7385, -2.4254, -3.3934, -4.7130, -6.8309\n    ]\n    # ---------------------------------------------------------------\n\n    return energies, log_overlaps",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T14:16:57.987473",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_46_main",
     "task_topic_tags": [
       "hamiltonian_inverse_design",

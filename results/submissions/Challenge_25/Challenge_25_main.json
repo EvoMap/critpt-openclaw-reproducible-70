@@ -2,10 +2,7 @@
   "problem_id": "Challenge_25_main",
   "generated_code": "import sympy as sp\nfrom sympy.physics.units import speed_of_light as c\n\nz, t_v, m_p, E_s, E_pL_Ep, L_s, L_X_lim, sigma_hat_p_pi, beta, bar_Delta, bar_epsilon_Delta, f_x = sp.symbols(\n    'z, t_v, m_p, E_s, E_pL_Ep, L_s, L_X_lim, sigma_hat_p_pi, beta, bar_Delta, bar_epsilon_Delta, f_x')\n\nf_beta = 2 / (1 + beta) * (5 / 16 + 1 / 200 * 30 ** (beta-1))\nE_p = m_p * c**2 * bar_epsilon_Delta / (2 * (1 + z)**2) * bar_Delta**2 / E_s\n\ndef answer(z, c, t_v, m_p, E_s, E_p, E_pL_Ep, L_s, L_X_lim, sigma_hat_p_pi, beta, bar_Delta, bar_epsilon_Delta, f_x, f_beta):\n    r\"\"\"\n    Return the expression of $\\delta_{\\min}^{2 + 2\\beta}$ in Sympy format.\n\n    Inputs\n    ----------\n    z                  : sympy.Symbol, source redshift, $z$\n    c                  : sympy.Symbol, speed of light, $c$\n    t_v                : sympy.Symbol, variability time-scale, $t_v$\n    m_p                : sympy.Symbol, proton mass, $m_p$\n    E_s                : sympy.Symbol, characteristic synchrotron photon energy, $E_s$\n    E_p                : sympy.Symbol, proton energy satisfying the photopion threshold, $E_p$\n    E_pL_Ep            : sympy.Symbol, proton power per logarithmic bin at $E_p$, $E_p L_{E_p}$\n    L_s                : sympy.Symbol, isotropic-equivalent synchrotron luminosity at $E_s$, $L_s$\n    L_X_lim            : sympy.Symbol, upper limit on 0.3 – 10 keV luminosity, $L_{X,\\mathrm{lim}}$\n    sigma_hat_p_pi     : sympy.Symbol, inelasticity-weighted photopion cross-section, $\\hat{\\sigma}_{p\\pi}$\n    beta               : sympy.Symbol, X-ray photon index, $\\beta$\n    bar_Delta          : sympy.Symbol, mean fractional proton energy transferred to pions, $\\bar{\\Delta}$\n    bar_epsilon_Delta  : sympy.Symbol, photon energy (in proton rest frame) at the $\\Delta(1232)$-resonance peak, $\\bar{\\epsilon}_\\Delta$\n    f_x                : sympy.Symbol, fraction of cascade luminosity emerging in 0.3 – 10 keV luminosity\n    f_beta             : sympy.Symbol, spectral function, $f(\\beta)$\n\n    Outputs\n    ----------\n    delta_min_pow      : sympy.Expr, minimum Doppler factor of the emission region, $\\delta_{\\min}^{2 + 2\\beta}$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    delta_min_pow = (f_x * E_pL_Ep * sigma_hat_p_pi * f_beta * L_s) / (4 * sp.pi * c**2 * t_v * E_s * L_X_lim) * (m_p * c**2 * bar_epsilon_Delta / (2 * E_p * E_s * (1 + z)**2))**(1 - beta)\n    # ---------------------------------------------------------------\n\n    return delta_min_pow",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:59:50.738262",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_25_main",
     "task_topic_tags": [
       "symbolic_derivation",

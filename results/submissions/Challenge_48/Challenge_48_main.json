@@ -2,10 +2,7 @@
   "problem_id": "Challenge_48_main",
   "generated_code": "def answer():\n    import math\n    eta = 10 * math.pi / 3\n    q_tilde = math.exp(-math.pi / eta)\n    \n    F_eta = 0.0\n    for k in range(1, 100):\n        term = (2 * (-1)**(k-1) * q_tilde**(k**2 + k) - q_tilde**(2*k)) / (k * (1 - q_tilde**(2*k)))\n        F_eta += term\n        if abs(term) < 1e-15:\n            break\n\n    return F_eta",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T14:27:48.142568",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_48_main",
     "task_topic_tags": [
       "matrix_numerical_method"

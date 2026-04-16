@@ -2,10 +2,7 @@
   "problem_id": "Challenge_29_main",
   "generated_code": "import sympy as sp\nimport sympy.physics.quantum.constants\n\ndef answer(lambda_, E, W, alpha, m, a_s, hbar):\n    r\"\"\"\n    Return the expressions of tunneling energy t and contact interaction U in Sympy format.\n\n    Inputs\n    ----------\n    lambda_:      sympy.Symbol, wavelength, $\\lambda$\n    E      :      sympy.Symbol, beam amplitude, $E$\n    W      :      sympy.Symbol, beam waist, $W$\n    alpha  :      sympy.Symbol, atomic polarizability, $\\alpha$\n    m      :      sympy.Symbol, atomic mass, $m$\n    a_s    :      sympy.Symbol, s-wave scattering length, $a_s$\n    hbar   :      sympy.Symbol, reduced Planck constant, $\\hbar$\n\n    Outputs\n    ----------\n    t      :      sympy.Expr, the expression of tunneling energy t associated with the Hubbard model\n    U      :      sympy.Expr, the expression of contact interaction U associated with the Hubbard model\n    \"\"\"\n    \n    # Recoil energy\n    E_R = hbar**2 * (2 * sp.pi / lambda_)**2 / (2 * m)\n    \n    # For beams polarized normal to the plane, their electric fields are parallel and they interfere.\n    # The optical potential is V(x,y) = - \\alpha E^2 (\\cos(kx) + \\cos(ky))^2.\n    # This forms a lattice with minima at the square grid rotated by 45 degrees, d = \\lambda / \\sqrt{2}.\n    V0 = alpha * E**2\n    \n    # Harmonic oscillator frequencies at the potential minima\n    omega_xy = (4 * sp.pi / lambda_) * sp.sqrt(alpha * E**2 / m)\n    omega_z = (4 / W) * sp.sqrt(alpha * E**2 / m)\n    \n    # Contact interaction U = (4\\pi \\hbar^2 a_s / m) * \\int |w(r)|^4 d^3r\n    # Evaluated with the 3D harmonic oscillator ground state approximation\n    U = 8 * sp.sqrt(2 * sp.pi) * a_s * sp.sqrt(hbar) * (alpha * E**2)**(sp.Rational(3, 4)) / (lambda_ * sp.sqrt(W) * m**(sp.Rational(1, 4)))\n    \n    # Overlap integral I_0 = exp(-(\\pi^2 / 2) \\sqrt{4 V_0 / E_R}) for distance d = \\lambda / \\sqrt{2}\n    I_0 = sp.exp(-sp.pi**2 * sp.sqrt(V0 / E_R))\n    \n    # Tunneling energy t in the tight-binding harmonic-oscillator approximation (V_0 >> E_R)\n    # Computed as t = - (H_{0,1} - H_{0,0} I_0)\n    t = I_0 * V0 * (2 * sp.pi**2 - 4)\n\n    return t, U",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T12:12:21.722796",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_29_main",
     "task_topic_tags": [
       "symbolic_derivation",

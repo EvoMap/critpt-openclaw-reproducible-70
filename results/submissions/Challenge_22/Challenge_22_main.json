@@ -2,10 +2,7 @@
   "problem_id": "Challenge_22_main",
   "generated_code": "import sympy as sp\n\nx = sp.symbols('x')\n\ndef answer(x):\n    r\"\"\"\n    Return the expression of $f(x)$ in Sympy format.\n\n    Inputs\n    ----------\n    x : sympy.Symbol, optimization variable $x\\in[0,1]$\n\n    Outputs\n    ----------\n    f : sympy.Expr, the explicit function form of $f(x)$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    theta = sp.Symbol('theta')\n    \n    # Binary entropy function (using base 2 for information in bits)\n    def H(p):\n        return -p * sp.log(p, 2) - (1 - p) * sp.log(1 - p, 2)\n        \n    f = (sp.cos(theta)**2) * H(x) + (1 - x) * H(sp.cos(theta)**2)\n    # ---------------------------------------------------------------\n\n    return f",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:44:23.675302",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_22_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

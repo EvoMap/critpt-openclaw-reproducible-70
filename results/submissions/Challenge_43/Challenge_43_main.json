@@ -2,10 +2,7 @@
   "problem_id": "Challenge_43_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the values of the fractional charges trapped to the disclination core.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    charge_nontrivial_a: float, fractional charge for the nontrivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_trivial_a: float, fractional charge for the trivial translation-equivalence class with Frank angle $–\\pi/2$.\n    charge_nontrivial_b: float, fractional charge for the nontrivial translation-equivalence class with one additional occupied bands.\n    charge_trivial_b: float, fractional charge for the trivial translation-equivalence class with one additional occupied bands.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    charge_nontrivial_a = 0.0\n    charge_trivial_a = -0.5\n    charge_nontrivial_b = 0.25\n    charge_trivial_b = 0.25\n    # ---------------------------------------------------------------\n\n    return charge_nontrivial_a, charge_trivial_a, charge_nontrivial_b, charge_trivial_b",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T13:50:10.749901",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_43_main",
     "task_topic_tags": [
       "many_body_spin_chain"

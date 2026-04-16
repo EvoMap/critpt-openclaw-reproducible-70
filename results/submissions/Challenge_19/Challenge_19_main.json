@@ -2,10 +2,7 @@
   "problem_id": "Challenge_19_main",
   "generated_code": "import sympy as sp\n\nr_1, r_2 = sp.symbols('r_1 r_2')\nmu, eta = sp.symbols('mu eta')\nphi_1, phi_2 = sp.symbols('phi_1 phi_2')\ntheta, nu, Omega = sp.symbols('theta nu Omega')\n\ndef answer(r_1, r_2, mu, eta, phi_1, phi_2, theta, nu, Omega):\n    r\"\"\"\n    Return the expression of $\\left\\langle {{{\\left| {I_{\\theta}\\left( \\nu  \\right)} \\right|}^2}} \\right\\rangle$\n    and its maximum squeezed and anti-squeezed values in Sympy format.\n\n    Inputs\n    ----------\n    r_1, r_2 : sympy.Symbol, gain parameters of the first and second OPAs\n    mu       : sympy.Symbol, transmission coefficient ($\\mu_s=\\mu_i=\\mu$)\n    eta      : sympy.Symbol, detection efficiency ($\\eta_s=\\eta_i=\\eta$)\n    phi_1    : sympy.Symbol, pump phase of the first OPA\n    phi_2    : sympy.Symbol, pump phase of the second OPA\n    theta    : sympy.Symbol, as defined in $I_{\\theta}(\\nu)$\n    nu       : sympy.Symbol, modulation frequency\n    Omega    : sympy.Symbol, half of the frequency of the pump laser\n\n    Outputs\n    ----------\n    original : sympy.Expr\n        Sympy expression for the original $\\left\\langle {{{\\left| {I_{\\theta}\\left( \\nu  \\right)} \\right|}^2}} \\right\\rangle$\n    max_squeezed, max_antisqueezed : sympy.Expr\n        Sympy expressions for the maximum squeezed and anti-squeezed\n        $\\left\\langle {{{\\left| {I_{\\theta}\\left( \\nu  \\right)} \\right|}^2}} \\right\\rangle$\n        when $\\phi_2-\\phi_1=\\pi$.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    K_sq = (sp.cosh(2*r_1)*sp.cosh(2*r_2) \n            + sp.sinh(2*r_1)*sp.sinh(2*r_2)*sp.cos(phi_2 - phi_1)\n            + sp.sinh(2*r_1)*sp.cosh(r_2)**2*sp.cos(2*theta - phi_1)\n            + sp.cosh(2*r_1)*sp.sinh(2*r_2)*sp.cos(2*theta - phi_2)\n            + sp.sinh(2*r_1)*sp.sinh(r_2)**2*sp.cos(2*theta - 2*phi_2 + phi_1))\n\n    term_1mu = sp.cosh(2*r_2) + sp.sinh(2*r_2)*sp.cos(2*theta - phi_2)\n\n    original = eta * mu * K_sq + eta * (1 - mu) * term_1mu + 1 - eta\n    \n    max_squeezed = eta * mu * sp.exp(2*r_1 - 2*r_2) + eta * (1 - mu) * sp.exp(-2*r_2) + 1 - eta\n    max_antisqueezed = eta * mu * sp.exp(2*r_2 - 2*r_1) + eta * (1 - mu) * sp.exp(2*r_2) + 1 - eta\n    # ---------------------------------------------------------------\n\n    return original, max_squeezed, max_antisqueezed",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:32:21.507064",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_19_main",
     "task_topic_tags": [
       "symbolic_derivation"

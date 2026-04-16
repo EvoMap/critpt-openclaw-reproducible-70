@@ -2,10 +2,7 @@
   "problem_id": "Challenge_53_main",
   "generated_code": "import sympy as sp\n\ndef answer(d):\n    r\"\"\"\n    Return the expressions of the coefficients in SymPy format.\n\n    Inputs\n    ----------\n    d: sympy.Symbol, variable, $d$\n\n    Output\n    ----------\n    coeff1: sympy.Expr, the coefficient in front of $P^{k}{}_{i} P_{kj}$\n    coeff2: sympy.Expr, the coefficient in front of $B_{k(i}P^k{}_{j)}$\n    \"\"\"\n    \n    coeff1 = sp.Integer(1)\n    coeff2 = -sp.Rational(4, 3) / (d - 4)\n    \n    return coeff1, coeff2",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T15:28:42.773631",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_53_main",
     "task_topic_tags": [
       "holography_field_theory"

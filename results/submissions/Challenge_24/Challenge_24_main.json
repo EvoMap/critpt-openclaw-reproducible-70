@@ -2,10 +2,7 @@
   "problem_id": "Challenge_24_main",
   "generated_code": "import sympy as sp\n\ny, p_z, epsilon_IR, mu = sp.symbols('y p_z epsilon_IR mu')\n\ndef answer(y, p_z, epsilon_IR, mu):\n    r\"\"\"\n    Return the expressions of $\\tilde{f}_q^{(1)}(y,p_z,\\epsilon_{\\rm IR},\\mu)$\n    in three intervals (i) $y < 0$, (ii) $0 < y < 1$, (iii) $y > 1$\n    in Sympy format.\n\n    Inputs\n    ----------\n    y: sympy.Symbol, momentum fraction in quasi-PDF, $y$\n    p_z: sympy.Symbol, large momentum, $p_z$\n    epsilon_IR: sympy.Symbol, infrared regulator, $\\epsilon_{\\rm IR}$\n    mu: sympy.Symbol, renormalization scale, $\\mu$\n\n    Outputs\n    ----------\n    expr_neg: sympy.Expr, 1–loop correction $\\tilde{f}_q^{(1)}(y,p_z,\\epsilon_{\\rm IR},\\mu)$ for $y < 0$\n    expr_mid: sympy.Expr, 1–loop correction $\\tilde{f}_q^{(1)}(y,p_z,\\epsilon_{\\rm IR},\\mu)$ for $0 < y < 1$\n    expr_pos: sympy.Expr, 1–loop correction $\\tilde{f}_q^{(1)}(y,p_z,\\epsilon_{\\rm IR},\\mu)$ for $y > 1$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # Quark splitting function\n    P_qq = (1 + y**2) / (1 - y)\n    \n    # 1-loop correction for y < 0\n    # In this interval, |y| = -y and |1 - y| = 1 - y\n    tan_term_neg = (3*y - 1)/(y - 1) * sp.atan(sp.sqrt(1 - 2*y)/(-y)) / sp.sqrt(1 - 2*y)\n    expr_neg = P_qq * (sp.log(1 - y) - sp.log(-y)) - 1 + tan_term_neg - 1/(1 - y)\n    \n    # 1-loop correction for 0 < y < 1\n    # In this interval, |y| = y and |1 - y| = 1 - y\n    # Contains the collinear IR divergence matching the MSbar PDF\n    tan_term_mid = (3*y - 1)/(y - 1) * sp.atan(sp.sqrt(1 - 2*y)/y) / sp.sqrt(1 - 2*y)\n    expr_mid = P_qq * (-1/epsilon_IR + sp.log(4*p_z**2/mu**2) + sp.log(y) + sp.log(1 - y)) + y + tan_term_mid - 1/(1 - y)\n    \n    # 1-loop correction for y > 1\n    # In this interval, |y| = y and |1 - y| = y - 1\n    tan_term_pos = (3*y - 1)/(y - 1) * sp.atan(sp.sqrt(1 - 2*y)/y) / sp.sqrt(1 - 2*y)\n    expr_pos = P_qq * (sp.log(y) - sp.log(y - 1)) + 1 + tan_term_pos - 1/(y - 1)\n    # ---------------------------------------------------------------\n\n    return expr_neg, expr_mid, expr_pos",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:58:55.542846",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_24_main",
     "task_topic_tags": [
       "symbolic_derivation"

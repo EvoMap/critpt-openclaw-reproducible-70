@@ -2,10 +2,7 @@
   "problem_id": "Challenge_67_main",
   "generated_code": "import sympy as sp\n\nd = sp.symbols('d', integer=True)\n\ndef answer(d):\n    r\"\"\"\n    Return the expression of the quantum capacity of the channel in Sympy format.\n\n    Inputs\n    ----------\n    d: sympy.Symbol, dimension paramter, $d$\n\n    Outputs\n    ----------\n    quantum_capacity: sympy.Expr, the quantum capacity of the channel.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    quantum_capacity = sp.Integer(0)\n    # ---------------------------------------------------------------\n\n    return quantum_capacity",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T16:41:17.074092",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_67_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

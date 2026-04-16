@@ -2,10 +2,7 @@
   "problem_id": "Challenge_27_main",
   "generated_code": "import numpy as np\nfrom scipy.optimize import minimize_scalar\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\xi^2_{\\rm opt}$ in decibel.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    xi_opt_2: float, the Wineland spin squeezing parameter optimized over time $t$ ($\\xi^2_{\\rm opt}$) in dB\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    N = 10**6\n    chi = 1.0e-6\n    gamma = 0.01\n    gamma_z = 0.01\n\n    # Macroscopic decay rates derived from the Lindbladians:\n    # L_zj = sqrt(gamma_z) S^z_j -> Decay of S_x, S_y is gamma_z / 2\n    # L_+j, L_-j = sqrt(gamma) S^+-_j -> Decay of S_x, S_y is gamma, Decay of S_z is 2 * gamma\n    Gamma_1 = gamma + 0.5 * gamma_z\n    Gamma_2 = 2 * gamma\n\n    def get_xi2(t):\n        # Exact analytical solutions for the 1st and 2nd moments under mean-field approximation:\n        V_y = N/4 + (chi**2 * N**3 / (2 * Gamma_2)) * np.exp(-2 * Gamma_1 * t) * (t - (1 - np.exp(-Gamma_2 * t)) / Gamma_2)\n        C = (chi * N**2 / (2 * Gamma_2)) * np.exp(-Gamma_1 * t) * (1 - np.exp(-Gamma_2 * t))\n        \n        # Minimum variance in the y-z plane perpendicular to the mean spin direction (x-axis)\n        min_var = 0.5 * (V_y + N/4 - np.sqrt((V_y - N/4)**2 + C**2))\n        X = (N/2) * np.exp(-Gamma_1 * t)\n        \n        # Wineland spin-squeezing parameter definition\n        xi2 = N * min_var / (X**2)\n        return xi2\n\n    # Optimize the squeezing parameter over time\n    res = minimize_scalar(get_xi2, bounds=(0, 20), method='bounded')\n    xi_opt_2_linear = res.fun\n    \n    # Convert to decibels and format to 3 significant figures\n    xi_opt_2_dB = 10 * np.log10(xi_opt_2_linear)\n    xi_opt_2 = float(f\"{xi_opt_2_dB:.3g}\")\n    # ---------------------------------------------------------------\n\n    return xi_opt_2",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T12:07:38.116156",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_27_main",
     "task_topic_tags": [
       "hamiltonian_inverse_design",

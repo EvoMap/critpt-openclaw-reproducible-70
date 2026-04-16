@@ -2,10 +2,7 @@
   "problem_id": "Challenge_50_main",
   "generated_code": "def answer():\n    def poly_pow(A, k, d):\n        dp = [0] * (d + 1)\n        dp[0] = 1\n        for _ in range(k):\n            new_dp = [0] * (d + 1)\n            for i in range(1, d + 1):\n                if A[i] == 0: continue\n                for j in range(d + 1 - i):\n                    if dp[j] != 0:\n                        new_dp[i + j] += A[i] * dp[j]\n            dp = new_dp\n        return dp\n\n    def invert_series(P, d):\n        Q = [0] * (d + 1)\n        Q[1] = 1 // P[1]\n        for i in range(2, d + 1):\n            s = 0\n            for k in range(2, i + 1):\n                pk = poly_pow(Q, k, d)\n                s += P[k] * pk[i]\n            Q[i] = -s // P[1]\n        return Q\n\n    def poly_mul(A, B, d):\n        C = [0] * (d + 1)\n        for i in range(d + 1):\n            for j in range(d + 1 - i):\n                C[i + j] += A[i] * B[j]\n        return C\n\n    import math\n\n    d = 40\n    # Precompute Catalan\n    C = [0] * (d + 1)\n    for n in range(1, d + 1):\n        C[n] = math.comb(2 * n, n) // (n + 1)\n\n    A = [0] * (d + 1)",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T14:47:11.455838",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_50_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

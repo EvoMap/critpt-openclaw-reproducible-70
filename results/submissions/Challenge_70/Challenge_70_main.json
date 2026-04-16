@@ -2,10 +2,7 @@
   "problem_id": "Challenge_70_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the value of $\\text{tr}(N^{\\otimes n}\\psi^{\\otimes 4})$.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    trace: float, $\\text{tr}(N^{\\otimes n}\\psi^{\\otimes 4})$ when $|\\psi\\rangle$ is the $n$-qubit GHZ state for $n=3$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # We construct the 16x16 matrix N which acts on the computational basis of 4 qubits.\n    # N is the Haar integral of U^{\\otimes 4} (S \\otimes S) (U^\\dagger)^{\\otimes 4}.\n    # By Schur-Weyl duality and twirling, N can be exactly expressed as a linear \n    # combination of permutations V(pi) in S_4.\n    \n    N = [[0.0] * 16 for _ in range(16)]\n    \n    def apply_perm(y, pi):\n        return tuple(y[pi[i]] for i in range(4))\n        \n    def add_perm(coeff, pi):\n        for i in range(16):\n            y = tuple(map(int, f\"{i:04b}\"))\n            x = apply_perm(y, pi)\n            x_idx = int(\"\".join(map(str, x)), 2)\n            N[x_idx][i] += coeff\n\n    # Coefficients of permutations derived analytically from twirling over U(2):\n    add_perm(2.0/15.0, (0, 1, 2, 3))     # I\n    add_perm(2.0/15.0, (1, 0, 2, 3))     # (0 1)\n    add_perm(2.0/15.0, (0, 1, 3, 2))     # (2 3)\n    \n    add_perm(-1.0/30.0, (2, 1, 0, 3))    # (0 2)\n    add_perm(-1.0/30.0, (3, 1, 2, 0))    # (0 3)\n    add_perm(-1.0/30.0, (0, 2, 1, 3))    # (1 2)\n    add_perm(-1.0/30.0, (0, 3, 2, 1))    # (1 3)\n    \n    add_perm(1.0/15.0, (1, 0, 3, 2))     # (0 1)(2 3)\n    add_perm(1.0/15.0, (2, 3, 0, 1))     # (0 2)(1 3)\n    add_perm(1.0/15.0, (3, 2, 1, 0))     # (0 3)(1 2)\n    \n    # By symmetry of the GHZ tensor product state grouped over the row topology, \n    # the requested observable evaluates to (1/16) * sum_{x,y} N_{x,y}^3\n    trace = 0.0\n    for x in range(16):\n        for y in range(16):\n            trace += N[x][y]**3\n            \n    trace = trace / 16.0\n    # ---------------------------------------------------------------\n\n    return trace",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T17:04:22.116119",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_70_main",
     "task_topic_tags": [
       "many_body_spin_chain"

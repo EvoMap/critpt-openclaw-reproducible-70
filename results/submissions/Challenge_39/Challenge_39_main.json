@@ -2,10 +2,7 @@
   "problem_id": "Challenge_39_main",
   "generated_code": "import sympy as sp\n\nn, np = sp.symbols('n n_prime', integer=True, nonnegative=True)\ng, gamma = sp.symbols('g gamma', positive=True)\nalpha = sp.symbols('alpha')\n\ndef answer(n, np, g, gamma, alpha):\n    r\"\"\"\n    Return the expression of the steady-state cavity coherence in SymPy format.\n\n    Inputs\n    ----------\n    n : sympy.Symbol\n        Photon number in state $|n\\rangle$.\n    np : sympy.Symbol\n        Photon number in state $|n'\\rangle$.\n    g : sympy.Symbol\n        Atom-cavity coupling constant $g$.\n    gamma : sympy.Symbol\n        Spontaneous-emission rate from $|e\\rangle$ to $|d\\rangle$, $\\gamma$.\n    alpha : sympy.Symbol\n        Complex amplitude of the initial coherent state $|\\alpha\\rangle$.\n\n    Outputs\n    ----------\n    coherence : sympy.Expr\n        Symbolic expression for the steady-state cavity coherence $\\langle n'| \\hat \\rho_{c,ss}|n\\rangle$.\n    \"\"\"\n\n    # The bright state |b, 0> never interacts with the cavity and never decays\n    term1 = sp.KroneckerDelta(np, 0) * sp.KroneckerDelta(n, 0)\n    \n    # Contribution from initial states |b, n'+1> and <b, n+1| decaying into the dark state |d>\n    num = 4 * gamma**2 * alpha**(np + 1) * sp.conjugate(alpha)**(n + 1)\n    den = (g**2 * (np - n)**2 + 2 * gamma**2 * (np + n + 2)) * sp.sqrt(sp.factorial(np) * sp.factorial(n))\n    term2 = num / den\n    \n    coherence = sp.exp(-sp.Abs(alpha)**2) * (term1 + term2)\n\n    return coherence",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T13:27:46.646070",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_39_main",
     "task_topic_tags": [
       "symbolic_derivation",

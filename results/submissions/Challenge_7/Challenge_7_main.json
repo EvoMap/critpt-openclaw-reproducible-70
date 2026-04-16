@@ -2,10 +2,7 @@
   "problem_id": "Challenge_7_main",
   "generated_code": "import sympy as sp\n\ndef answer(F, k, n, d, q):\n    r\"\"\"\n    Return the expression of the quantum Fisher information for $\\theta_1$ in Sympy format.\n\n    Inputs\n    ----------\n    F: sympy.Symbol, initialization fidelity, $F$\n    k: sympy.Symbol, entangling gate fidelity, $k$\n    n: sympy.Symbol, qubit number per node, $n$\n    d: sympy.Symbol, sensor node number, $d$\n    q: sympy.Symbol, defined by $q = (1 + e^{-\\gamma t}) / 2$\n\n    Outputs\n    ----------\n    QFI: sympy.Expr, quantum Fisher information for $\\theta_1$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The GHZ fidelity is given as F(n) = F * k**(n - 1)\n    F_GHZ = F * k**(n - 1)\n    \n    # Total number of qubits in the global GHZ state\n    N = n * d\n    \n    # Dephasing parameter: eta = e^{-\\gamma t} = 2q - 1\n    eta = 2 * q - 1\n    \n    # Quantum Fisher Information for the accumulated relative phase \\Phi\n    # For a depolarized GHZ state rho = p |GHZ><GHZ| + (1-p) I / 2^N,\n    # the QFI w.r.t the total phase \\Phi is derived as:\n    QFI_phi = (eta**(2 * N) * (F_GHZ * 2**N - 1)**2) / ((2**N - 1) * (F_GHZ * 2**N - 2 * F_GHZ + 1))\n    \n    # The parameter to be estimated is \\theta_1 = (1/\\sqrt{d}) \\sum x_i\n    # The total accumulated phase is \\Phi = n \\sum x_i = n * \\sqrt{d} * \\theta_1\n    # QFI transforms as QFI_{\\theta_1} = (\\partial \\Phi / \\partial \\theta_1)^2 QFI_\\phi\n    QFI = n**2 * d * QFI_phi\n    # ---------------------------------------------------------------\n\n    return QFI",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T08:39:40.863614",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_7_main",
     "task_topic_tags": [
       "symbolic_derivation",

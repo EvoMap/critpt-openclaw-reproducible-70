@@ -2,10 +2,7 @@
   "problem_id": "Challenge_47_main",
   "generated_code": "import numpy as np\nfrom scipy.fft import fft, ifft\n\ndef answer():\n    r\"\"\"\n    Return the value of $\\mathrm{Tr}(L^4)$ under the given spin configuration.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    Tr_L4: float, value of $\\mathrm{Tr}(L^4)$ for the spin configuration\n        $$\\vec{m}(x) = ( \\sin \\theta \\cos \\phi,\\, \\sin \\theta \\sin \\phi,\\, \\cos \\theta )$$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # Numerical spectral method to compute the trace of the Lax operator L^4\n    # Domain size L_p and number of grid points N\n    N = 1024\n    L_p = 40.0\n    x = np.linspace(-L_p / 2, L_p / 2, N, endpoint=False)\n    dx = x[1] - x[0]\n    \n    # Spin configuration\n    theta = x\n    phi = 2 * np.pi / 3 * np.exp(-x**2)\n    \n    m1 = np.sin(theta) * np.cos(phi)\n    m2 = np.sin(theta) * np.sin(phi)\n    m3 = np.cos(theta)\n    \n    # Construct Hilbert transform operator in frequency domain\n    k = np.fft.fftfreq(N, d=dx) * 2 * np.pi\n    H_mult = -1j * np.sign(k)\n    H_mult[0] = 0\n    \n    # Build matrix representation of Hilbert transform H acting on functions\n    H_mat = np.zeros((N, N), dtype=complex)\n    for i in range(N):\n        v = np.zeros(N)\n        v[i] = 1\n        H_mat[:, i] = ifft(H_mult * fft(v))\n        \n    # Tensor product with 2x2 identity for vector-valued functions\n    H_full = np.kron(H_mat, np.eye(2))\n    \n    # Build block-diagonal matrix representation for multiplication by m(x)\n    M_full = np.zeros((2 * N, 2 * N), dtype=complex)\n    for i in range(N):\n        M_full[2 * i : 2 * i + 2, 2 * i : 2 * i + 2] = np.array([\n            [m3[i], m1[i] - 1j * m2[i]],\n            [m1[i] + 1j * m2[i], -m3[i]]\n        ])\n        \n    # Construct Lax operator L = H m - m H acting on 2-component column vectors\n    L_op = H_full @ M_full - M_full @ H_full\n    \n    # Compute L^4 matrix\n    L_op2 = L_op @ L_op\n    L_op4 = L_op2 @ L_op2\n    \n    # Trace of the operator on 2x2 matrices is exactly twice the trace on column vectors.\n    Tr_L4 = float(2 * np.trace(L_op4).real)\n    # ---------------------------------------------------------------\n\n    return Tr_L4",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-26T08:09:59.869476",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "rerun_failed_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_47_main",
     "task_topic_tags": [
       "hamiltonian_inverse_design",

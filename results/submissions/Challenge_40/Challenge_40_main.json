@@ -2,10 +2,7 @@
   "problem_id": "Challenge_40_main",
   "generated_code": "import sympy as sp\n\nchi, kappa, sigma, k = sp.symbols('chi kappa sigma k', real=True)\n\ndef answer(chi, kappa, sigma, k):\n    r\"\"\"\n    Return the expression of hydrodynamic mode spectrum $\\omega(k)$ in Sympy format.\n\n    Inputs\n    ----------\n    chi: sympy.Symbol, charge susceptibility, $\\chi$\n    kappa: sympy.Symbol, quadrupole superfluid stiffness, $\\kappa$\n    sigma: sympy.Symbol, coefficient of the leading order dissipative term, $\\sigma$\n    k: sympy.Symbol, momentum, $k$\n\n    Outputs\n    ----------\n    omega: set[sympy.Expr], a set of hydrodynamic mode dispersion relation(s), $\\omega(k)$\n    \"\"\"\n    disc = -sigma**2 * k**12 / chi**2 + 4 * kappa * k**6 / chi\n    omega_1 = (-sp.I * sigma * k**6 / chi + sp.sqrt(disc)) / 2\n    omega_2 = (-sp.I * sigma * k**6 / chi - sp.sqrt(disc)) / 2\n    omega = {omega_1, omega_2}\n    \n    return omega",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T13:35:48.527042",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_40_main",
     "task_topic_tags": [
       "symbolic_derivation",

@@ -2,10 +2,7 @@
   "problem_id": "Challenge_3_main",
   "generated_code": "import sympy as sp\n\nm, r0, eta = sp.symbols('m r0 eta', positive=True)\n\ndef answer(m, eta, r0):\n    r\"\"\"\n    Return expression of the one-point function\n\n    Inputs\n    ----------\n    m: sympy.Symbol, mass of the buld field, $m$\n    eta: sympy.Symbol, the brane tension, $\\eta$\n    r0: sympy.Symbol, the black hole radius, $r_0$\n\n    Output\n    ----------\n    O_x: sympy.Expr, the one-point function, $\\langle \\mathcal{O}(x) \\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULT BELOW ------------------\n    O_x = (r0 / 2 * sp.sqrt((1 - eta) / (1 + eta)))**m\n    # ---------------------------------------------------------------\n\n    return O_x",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T08:28:58.955563",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_3_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

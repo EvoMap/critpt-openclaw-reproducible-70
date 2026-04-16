@@ -2,10 +2,7 @@
   "problem_id": "Challenge_59_main",
   "generated_code": "import sympy as sp\n\ndef answer(M, epsilon, a):\n    r\"\"\"\n    Return the expressions of the $n_x$ criteria for structural factor to be nonvanishing\n    and the corresponding structure factors in Sympy format.\n\n    Inputs\n    ----------\n    M         : sympy.Symbol\n        Large integer relating the strain wavelength to the lattice spacing.\n    epsilon   : sympy.Symbol\n        Amplitude of the static periodic strain.\n    a         : sympy.Symbol\n        Lattice spacing of the simple-cubic crystal.\n\n    Outputs\n    ----------\n    allowed : set[(sympy.Expr, sympy.Expr)], Set of nonvanishing $n_x$ criteria with corresponding structure factor, {(nx, S)}\n        nx: sympy.Expr, $n_x$ component of the reciprocal space vector in the lowest possible order Brillouin Zone\n          for which the structure factor is nonvanishing (besides $n_x = M$).\n        S: sympy.Expr, corresponding structure factor to the first order in $\\varepsilon$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    allowed = {\n        (M - 1, sp.pi * epsilon * (M - 1) / (M * a)),\n        (M + 1, -sp.pi * epsilon * (M + 1) / (M * a))\n    }\n    # ---------------------------------------------------------------\n\n    return allowed",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T16:08:34.265939",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_59_main",
     "task_topic_tags": [
       "many_body_spin_chain"

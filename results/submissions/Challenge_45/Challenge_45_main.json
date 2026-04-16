@@ -2,10 +2,7 @@
   "problem_id": "Challenge_45_main",
   "generated_code": "def answer(mc_x, mc_y, mv_x, mv_y):\n    r\"\"\"\n    Return the value of the goniopolarity condition.\n\n    Inputs\n    ----------\n    mc_x, mc_y, mv_x, mv_y: float\n        Effective masses $m_{c/v,\\alpha}$ with $\\alpha = x,y$, in unit of a typical carrier mass $m_0$ that is five times of the electron mass.\n\n    Outputs\n    ----------\n    have_goniopolarity: bool\n        True if the material exhibits goniopolarity, otherwise False.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    have_goniopolarity = (mc_x - mv_x) * (mc_y - mv_y) < 0\n    # ---------------------------------------------------------------\n\n    return have_goniopolarity",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T14:01:21.352874",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_45_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

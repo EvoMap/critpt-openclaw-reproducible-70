@@ -2,10 +2,7 @@
   "problem_id": "Challenge_12_main",
   "generated_code": "import sympy as sp\n\nt, k_12, k_13, k_23, k_34, N, q = sp.symbols('t k_{12} k_{13} k_{23} k_{34} N q')\n\ndef answer(t, k_12, k_13, k_23, k_34, N, q):\n    r\"\"\"\n    Return the expression of the phase between $|\\psi^i(q)\\rangle$ and $|\\psi^f(q)\\rangle$ in Sympy format.\n\n    Inputs\n    ----------\n    t: sympy.Symbol, tunneling amplitude $t$\n    k_12, k_13, k_23, k_34: sympy.Symbol, ground-state fusion channels\n          $k_{ij}\\in Z_N$ with $k_{ij}<-\\frac{\\phi_{ij}}{2\\pi}<k_{ij}+1$\n    N: sympy.Symbol, integer N defining $Z_N$\n    q: sympy.Symbol, fusion channel between the unpaired zero modes\n\n    Outputs\n    ----------\n    phase: sympy.Expr, the expression of the phase between the initial ground state $|\\psi^i(q)\\rangle$\n          and final ground state $|\\psi^f(q)\\rangle$\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    # The total accumulated phase combining the geometric braiding of the zero modes, \n    # the Aharonov-Bohm flux through the 1-2-3 loop, and the final state permutation\n    phase = 2 * sp.pi / N * (q + k_34 + k_12 + k_23 - k_13)\n    # ---------------------------------------------------------------\n\n    return phase",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T11:08:36.759727",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_12_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

@@ -2,10 +2,7 @@
   "problem_id": "Challenge_42_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the values of scaling exponents $\\alpha$ and $\\beta$.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    alpha: float, scaling exponent in $\\xi\\propto n_i^{\\alpha}$.\n    beta: float, scaling exponent in $\\Delta V_g\\propto n_i^{\\beta}$.\n    have_plateau: bool, True if such plateau appear in 3D topological insulator.\n    are_important: bool, True if charge impuritis are still important.\n    is_long_range: bool, True if long-range scattering give longer mean free path, False if short-range scattering.\n    is_longer: bool, True if long-range scattering in both graphene and 3D topological insulator give longer mean free path.\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    alpha = -1/3\n    beta = 2/3\n    have_plateau = False\n    are_important = True\n    is_long_range = True\n    is_longer = True\n    # ---------------------------------------------------------------\n\n    return alpha, beta, have_plateau, are_important, is_long_range, is_longer",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T13:38:33.339728",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_42_main",
     "task_topic_tags": [
       "general_quantum_reasoning"

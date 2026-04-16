@@ -2,10 +2,7 @@
   "problem_id": "Challenge_4_main",
   "generated_code": "def answer():\n    r\"\"\"\n    Return the OAM and helicity of the 23rd harmonic order.\n\n    Inputs\n    ----------\n    None\n\n    Outputs\n    ----------\n    harmonic_23 : set[tuples[int, int]]\n        A set of allowed combinations of OAM and helicity for the 23rd harmonic order, ($\\ell$, $\\sigma$).\n    \"\"\"\n\n    # ------------------ FILL IN YOUR RESULTS BELOW ------------------\n    harmonic_23 = set()\n    \n    # Conservation of Energy: N1 + N2 + N3 = 23\n    # Conservation of Spin (SAM): sigma_q = N1*sigma1 + N2*sigma2 + N3*sigma3\n    # sigma1 = -1, sigma2 = 1, sigma3 = -1\n    # sigma_q = -N1 + N2 - N3 = N2 - (N1 + N3) = N2 - (23 - N2) = 2*N2 - 23\n    # Allowed SAM for a single emitted photon: sigma_q = +/- 1\n    \n    # Case 1: sigma_q = -1 => 2*N2 - 23 = -1 => N2 = 11\n    # This means N1 + N3 = 12. \n    # Since N1, N3 >= 0, N1 can range from 0 to 12.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l1 = -1, l2 = 2, l3 = 1\n    # l_q = -N1 + 2*11 + (12 - N1)*1 = 34 - 2*N1\n    for n1 in range(13):\n        l = 34 - 2 * n1\n        harmonic_23.add((l, -1))\n        \n    # Case 2: sigma_q = 1 => 2*N2 - 23 = 1 => N2 = 12\n    # This means N1 + N3 = 11. \n    # Since N1, N3 >= 0, N1 can range from 0 to 11.\n    # Conservation of OAM: l_q = N1*l1 + N2*l2 + N3*l3\n    # l_q = -N1 + 2*12 + (11 - N1)*1 = 35 - 2*N1\n    for n1 in range(12):\n        l = 35 - 2 * n1\n        harmonic_23.add((l, 1))\n    # ---------------------------------------------------------------\n\n    return harmonic_23",
   "model": "openclaw/local-agent",
-  "timestamp": "2026-03-25T08:32:49.881765",
   "generation_config": {
-    "runner": "openclaw_critpt_runner.py",
-    "run_id": "manual_gen_20260325_081355",
     "include_sub_problems": false,
     "retries": 2,
     "concurrency": 2,
@@ -22,8 +19,6 @@
     "enable_arxiv_learning": true,
     "arxiv_max_papers": 1,
     "repair_timeout_seconds": 180,
-    "gene_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_genes.json",
-    "capsule_store_path": "/home/admin/project/benchmarks/critpt-openclaw/analysis/knowledge/critpt_capsules.jsonl",
     "task_problem_id": "Challenge_4_main",
     "task_topic_tags": [
       "general_quantum_reasoning"
